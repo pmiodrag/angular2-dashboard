@@ -1,0 +1,28 @@
+<div  *ngIf="authService.loggedIn()">
+    <div class="col-md-11 voffset4">
+        <md-toolbar class="col-md-12 combo_blue_bg glass"> 
+            <div class="btn-block col-md-6">
+                <div class="col-md-2"><span class="logo col-md-12 white_bg combo_blue">Dashboard</span></div>
+                <div class="frame frame_active small">                        
+                    <a  [routerLink]="['/dashboard']">
+                        <i class="material-icons">dashboard</i>
+                    </a>
+                </div>
+            </div>
+        </md-toolbar>
+    </div>
+    <div class="voffset4 col-md-10" >
+        <md-grid-list cols="5" rowHeight="200px" >
+            <md-grid-tile id="dashboard" *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows" >  
+                <div class="contact glass"> {{tile.text}} </div>
+                <md-card-avatar>   
+                    <div class="frame small glass">                        
+                        <a [routerLink]="[tile.link]" >
+                            <i class="material-icons combo_blue">{{tile.icon}}</i>
+                        </a>
+                    </div>
+                </md-card-avatar>
+            </md-grid-tile>           
+        </md-grid-list>
+    </div>
+</div>

@@ -4,37 +4,43 @@
     .md-radio-inner { display: none !important; }
 </style>
 <div class="col-md-12 voffset4">
-    <md-toolbar class="col-md-12 glass">
+    <md-toolbar class="col-md-12 glass combo_blue_bg">
+         <div class="col-md-2"><span class="logo col-md-12 white_bg combo_blue">Doctors</span></div>
+        <div class="frame frame_active small">                        
+            <a  [routerLink]="['/doctors']">
+                 <i class="material-icons">face</i>
+            </a>
+        </div>
         <!--        <span class="col-md-1 text-deeppurpleprimary">{{formTitle}}</span>-->
-        <button md-mini-fab class="combo_blue" [ngClass]="iconClassBg" (click)="setPatientFormPage(patientFormPage.Personal)" >
-            <i class="material-icons" [ngClass]="{'combo_orange': (patientStore.patientFormPage | async ) == patientFormPage.Personal}">person</i>                            
+        <button md-mini-fab class="combo_blue" [ngClass]="iconClassBg" (click)="setDoctorFormPage(doctorFormPage.Personal)" >
+            <i class="material-icons" [ngClass]="{'combo_orange': (doctorStore.doctorFormPage | async ) == doctorFormPage.Personal}">person</i>                            
         </button> 
         <span class="col-md-1"></span>
-        <button  md-mini-fab  class="combo_blue" [ngClass]="iconClassBg" (click)="setPatientFormPage(patientFormPage.Photo)">
-            <i class="material-icons"  [ngClass]="{'combo_orange': (patientStore.patientFormPage | async ) == patientFormPage.Photo}">add_a_photo</i>                
+        <button  md-mini-fab  class="combo_blue" [ngClass]="iconClassBg" (click)="setDoctorFormPage(doctorFormPage.Photo)">
+            <i class="material-icons"  [ngClass]="{'combo_orange': (doctorStore.doctorFormPage | async ) == doctorFormPage.Photo}">add_a_photo</i>                
         </button>
         <span class="col-md-1"></span>
-        <button  md-mini-fab  class="combo_blue" [ngClass]="iconClassBg" (click)="setPatientFormPage(patientFormPage.Contact)">
-            <i class="material-icons" [ngClass]="{'combo_orange': (patientStore.patientFormPage | async ) == patientFormPage.Contact}">contact_mail</i>             
+        <button  md-mini-fab  class="combo_blue" [ngClass]="iconClassBg" (click)="setDoctorFormPage(doctorFormPage.Contact)">
+            <i class="material-icons" [ngClass]="{'combo_orange': (doctorStore.doctorFormPage | async ) == doctorFormPage.Contact}">contact_mail</i>             
         </button>
         <span class="col-md-1"></span>
-        <button  md-mini-fab  class="combo_blue" [ngClass]="iconClassBg" (click)="setPatientFormPage(patientFormPage.HealthInfo)">
-            <i class="material-icons" [ngClass]="{'combo_orange': (patientStore.patientFormPage | async ) == patientFormPage.HealthInfo}">description</i>     
+        <button  md-mini-fab  class="combo_blue" [ngClass]="iconClassBg" (click)="setDoctorFormPage(doctorFormPage.Education)">
+            <i class="material-icons" [ngClass]="{'combo_orange': (doctorStore.doctorFormPage | async ) == doctorFormPage.Education}">school</i>     
         </button>
         <span class="col-md-1"></span>
-        <button  md-mini-fab  class="combo_blue" [ngClass]="iconClassBg" (click)="setPatientFormPage(patientFormPage.Summary)">
-            <i class="material-icons" [ngClass]="{'combo_orange': (patientStore.patientFormPage | async ) == patientFormPage.Summary}">note</i>                  
+        <button  md-mini-fab  class="combo_blue" [ngClass]="iconClassBg" (click)="setDoctorFormPage(doctorFormPage.Summary)">
+            <i class="material-icons" [ngClass]="{'combo_orange': (doctorStore.doctorFormPage | async ) == doctorFormPage.Summary}">note</i>                  
         </button>
          <span class="col-md-1"></span>
-         <button md-mini-fab [ngClass]="iconClassBg" [routerLink]="['/patients']" >
+         <button md-mini-fab [ngClass]="iconClassBg" [routerLink]="['/doctors']" >
             <i class="material-icons" [ngClass]="iconClass">arrow_back</i>                          
           </button> 
     </md-toolbar>
     <div id="card" class="gradient_card"> 
 
         <md-card-content>
-            <form [formGroup]="patientForm" novalidate> 
-                <md-list  *ngIf="(patientStore.patientFormPage | async ) == patientFormPage.Personal"  formGroupName="personal" >  
+            <form [formGroup]="doctorForm" novalidate> 
+                <md-list  *ngIf="(doctorStore.doctorFormPage | async ) == doctorFormPage.Personal"  formGroupName="personal" >  
                     <md-list-item class="badge glass white action_btn col-md-6">
                         <i class="material-icons combo_blue" >person</i>
                         <span class="hoffset1">PERSONAL DATA</span>                    
@@ -55,25 +61,26 @@
                             </md-radio-button>
                         </md-radio-group></div>
                 </md-list-item>
+                
                 <md-list-item class="col-md-12 action_btn voffset8">
                     <div md-line class="col-md-12 voffset8">
                         <md-input class="col-md-6" ngDefaultControl  formControlName="firstname" id="firstname" placeholder="First name"></md-input>
-                        <small [hidden]="!patientForm.controls.personal.controls.firstname.touched || (patientForm.controls.personal.controls.firstname.valid && patientForm.controls.personal.controls.firstname.touched)">
+                        <small [hidden]="!doctorForm.controls.personal.controls.firstname.touched || (doctorForm.controls.personal.controls.firstname.valid && doctorForm.controls.personal.controls.firstname.touched)">
                             Firstname required
                     </small>
                 </div>
                 <div md-line class="col-md-12 voffset8">
-                    <md-input class="col-md-6" ngDefaultControl formControlName="middlename" id="middlename" placeholder="Middlename" align="end"  [(ngModel)]="patient.middlename" [value]="patient.middlename" ></md-input>
+                    <md-input class="col-md-6" ngDefaultControl formControlName="middlename" id="middlename" placeholder="Middlename"  [(ngModel)]="doctor.middlename" [value]="doctor.middlename" ></md-input>
                 </div>
                 <div md-line class="col-md-12 voffset8">
                     <md-input class="col-md-6" ngDefaultControl formControlName="lastname" id="lastname" placeholder="Last name">  </md-input>
-                    <small [hidden]="!patientForm.controls.personal.controls.lastname.touched || (patientForm.controls.personal.controls.lastname.valid && patientForm.controls.personal.controls.firstname.touched)">
+                    <small [hidden]="!doctorForm.controls.personal.controls.lastname.touched || (doctorForm.controls.personal.controls.lastname.valid && doctorForm.controls.personal.controls.firstname.touched)">
                         Lastname required
                 </small>
             </div>
         </md-list-item>
     </md-list>
-    <md-list  *ngIf="(patientStore.patientFormPage | async ) == patientFormPage.Contact" formGroupName="contact" >
+    <md-list  *ngIf="(doctorStore.doctorFormPage | async ) == doctorFormPage.Contact" formGroupName="contact" >
         <md-list-item class="badge glass white action_btn col-md-6">
             <i class="material-icons combo_blue" >contact_mail</i>
             <span class="hoffset1">CONTACT DATA</span>
@@ -81,54 +88,57 @@
         <md-list-item class="col-md-12 action_btn">               
             <div md-line class="col-md-12 voffset8">       
                 <md-input class="col-md-6" ngDefaultControl type="email" placeholder="Email" id="email" formControlName="email"></md-input>
-                <small [hidden]="!patientForm.controls.contact.controls.email.touched || (patientForm.controls.contact.controls.email.valid && patientForm.controls.contact.controls.email.touched )">
+                <small [hidden]="!doctorForm.controls.contact.controls.email.touched || (doctorForm.controls.contact.controls.email.valid && doctorForm.controls.contact.controls.email.touched )">
                     Email required
             </small>
         </div>
         <div md-line class="col-md-12 voffset8">
-            <md-input class="col-md-6" ngDefaultControl formControlName="place" id="place" placeholder="Place" align="end"></md-input>
+            <md-input class="col-md-6" ngDefaultControl formControlName="place" id="place" placeholder="Place" ></md-input>
         </div>
         <div md-line class="col-md-12 voffset8">
-            <md-input class="col-md-6" ngDefaultControl formControlName="street" id="street" placeholder="Street" align="end"></md-input>
+            <md-input class="col-md-6" ngDefaultControl formControlName="street" id="street" placeholder="Street" ></md-input>
         </div>
         <div md-line class="col-md-12 voffset8">
-            <md-input class="col-md-6" ngDefaultControl formControlName="phone" id="phone" placeholder="Phone number" align="end"></md-input>
+            <md-input class="col-md-6" ngDefaultControl formControlName="phone" id="phone" placeholder="Phone number"></md-input>
         </div>
         <div md-line class="col-md-12 voffset8">
             <md-input class="col-md-6" ngDefaultControl formControlName="mobilephone"  id="mobilephone" placeholder="Mobile Phone number" ></md-input>
         </div>
     </md-list-item>
 </md-list>
-<md-list  *ngIf="(patientStore.patientFormPage | async ) == patientFormPage.HealthInfo" formGroupName="additional">
+<md-list  *ngIf="(doctorStore.doctorFormPage | async ) == doctorFormPage.Education" formGroupName="education">
     <md-list-item class="badge glass white action_btn col-md-6">
-        <i class="material-icons combo_blue" >description</i>
-        <span class="hoffset1">HEALTH INFO</span>
+        <i class="material-icons combo_blue" >school</i>
+        <span class="hoffset1">EDUCATION INFO</span>
     </md-list-item>
-    <md-list-item class="col-md-12 action_btn voffset8">  
+    <md-list-item class="col-md-12 action_btn voffset8"> 
         <div md-line class="col-md-12 voffset8">
-            <md-input class="col-md-6"  placeholder="Allergies" ngDefaultControl formControlName="allergies" ></md-input>
+            <md-input class="col-md-6" ngDefaultControl formControlName="title" id="middlename" placeholder="Title"  [(ngModel)]="doctor.title" [value]="doctor.title" ></md-input>
         </div>
         <div md-line class="col-md-12 voffset8">
-            <textarea class="col-md-6" md-input ngDefaultControl formControlName="notes" placeholder="Notes"  columns="3" md-maxlength="1500" rows="5"></textarea> 
+            <md-input class="col-md-6"  placeholder="Degree Year" ngDefaultControl formControlName="degreeyear" ></md-input>
+        </div>
+        <div md-line class="col-md-12 voffset8">
+            <md-input class="col-md-6" md-input ngDefaultControl formControlName="degreeplace" placeholder="Degree Place"  columns="3" md-maxlength="1500" rows="5"></md-input> 
         </div>
     </md-list-item>
 </md-list>
-<md-list  *ngIf="(patientStore.patientFormPage | async ) == patientFormPage.Photo">
+<md-list  *ngIf="(doctorStore.doctorFormPage | async ) == doctorFormPage.Photo">
     <md-list-item class="badge glass white action_btn col-md-6">
         <i class="material-icons combo_blue" >add_a_photo</i>
         <span class="hoffset1">GALLERY</span>
     </md-list-item>
 </md-list>
-<div class="form-group col-md-6" *ngIf="(patientStore.patientFormPage | async ) == patientFormPage.Summary">
+<div class="form-group col-md-6" *ngIf="(doctorStore.doctorFormPage | async ) == doctorFormPage.Summary">
     
-    <div class="contact">{{ patientForm.value.personal.firstname | capitalize }} {{ patientForm.value.personal.middlename | capitalize }} {{ patientForm.value.personal.lastname | capitalize }}</div>
+    <div class="contact">{{ doctorForm.value.personal.firstname | capitalize }} {{ doctorForm.value.personal.middlename | capitalize }} {{ doctorForm.value.personal.lastname | capitalize }}</div>
     <md-card-avatar>   
-        <a *ngIf="!patientForm.value.personal.photo"  class="profile-spot middle no-border">
-            <img *ngIf="patientForm.value.personal.gender == 'F'"  src="assets/images/svg/human-female.svg"  class="img" />
-            <img *ngIf="patientForm.value.personal.gender == 'M'"  src="assets/images/svg/human-male.svg" class="img" />
+        <a *ngIf="!doctorForm.value.personal.photo"  class="profile-spot middle no-border">
+            <img *ngIf="doctorForm.value.personal.gender == 'F'"  src="assets/images/svg/human-female.svg"  class="img" />
+            <img *ngIf="doctorForm.value.personal.gender == 'M'"  src="assets/images/svg/human-male.svg" class="img" />
         </a>
-        <a *ngIf="patientForm.value.personal.photo" class="profile-spot small no-border">
-            <img  src="uploads/{{patientForm.value.personal.photo}}"  class="img" />
+        <a *ngIf="doctorForm.value.personal.photo" class="profile-spot small no-border">
+            <img  src="uploads/{{doctorForm.value.personal.photo}}"  class="img" />
         </a>
     </md-card-avatar>
     <md-list>
@@ -139,37 +149,43 @@
         <md-list-item class="col-md-6 action_btn">
             <p md-line>
                 <span><i class="material-icons combo_blue">perm_contact_calendar</i></span>
-                <span class="demo-2"> {{patientForm.value.personal.birthdate}} </span>
+                <span class="demo-2"> {{doctorForm.value.personal.birthdate}} </span>
             </p>
         </md-list-item>
         <md-list-item class="col-md-12 action_btn">
             <p md-line>
                 <span>  <i class="material-icons combo_blue">home</i> </span>
-                <span class="demo-2"> {{ patientForm.value.contact.street | capitalize }}, </span>
-                <span class="demo-2"> {{ patientForm.value.contact.place | capitalize }} </span>
+                <span class="demo-2"> {{ doctorForm.value.contact.street | capitalize }}, </span>
+                <span class="demo-2"> {{ doctorForm.value.contact.place | capitalize }} </span>
+            </p>
+        </md-list-item>
+         <md-list-item class="col-md-6 action_btn">
+            <p md-line>
+                <span>  <i class="material-icons combo_blue">school</i> </span>
+                <span class="demo-2"> {{ doctorForm.value.education.title | capitalize }} {{ doctorForm.value.education.degreeyear | capitalize }} {{ doctorForm.value.education.degreeplace | capitalize }}</span>
             </p>
         </md-list-item>
         <md-list-item class="col-md-6 action_btn">
             <p md-line>
                 <span>  <i class="material-icons combo_blue">contact_mail</i> </span>
-                <span class="demo-2"> {{patientForm.value.contact.email}} </span>
+                <span class="demo-2"> {{doctorForm.value.contact.email}} </span>
             </p>
         </md-list-item>                            
         <md-list-item class="col-md-6 action_btn">
             <p md-line>
                 <span><i class="material-icons combo_blue">contact_phone</i> </span>
-                <span class="demo-2">{{ patientForm.value.contact.phone | capitalize }}</span>
+                <span class="demo-2">{{ doctorForm.value.contact.phone | capitalize }}</span>
             </p>
         </md-list-item>
         <md-list-item class="col-md-6 action_btn">
             <p md-line>
                 <span>  <i class="material-icons combo_blue">smartphone</i> </span>
-                <span class="demo-2"> {{ patientForm.value.contact.mobilephone | capitalize }}</span>
+                <span class="demo-2"> {{ doctorForm.value.contact.mobilephone | capitalize }}</span>
             </p>
         </md-list-item>
         <md-list-item class="md-1-line">      
             <div class="col-sm-offset-3 col-sm-8">
-                <button md-raised-button class="md-accent" type="submit" (click)="onSubmit()" [disabled]="!patientForm.valid">add</button>
+                <button md-raised-button class="md-accent" type="submit" (click)="onSubmit()" [disabled]="!doctorForm.valid">add</button>
             </div>          
         </md-list-item>
     </md-list>

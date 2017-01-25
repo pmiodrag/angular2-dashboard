@@ -2,11 +2,14 @@ import {Injectable, Inject} from '@angular/core';
 import {Http, Headers, URLSearchParams, RequestOptions, Response} from '@angular/http';
 import {List} from 'immutable';
 import {Observable} from "rxjs/Observable";
-export interface IPatient {
+export interface IDoctor {
     id: number;
     firstname: string;
     lastname: string;
-    middlename: string,
+    middlename: string;
+    title: string;
+    degreeyear: string;
+    degreeplace: string;
     gender: string,
     address: string;
     place: string;
@@ -15,29 +18,27 @@ export interface IPatient {
     phone: string;
     mobilephone: string;
     photo: string;
-    allergies: string;
-    notes: string;
 }
 
-export class Patient implements IPatient {
+export class Doctor implements IDoctor {
     //    
-    constructor(public id: number, public firstname: string, public lastname: string, public middlename: string,
-        public gender: string, public address: string, public place: string, public birthdate: Date, public email: string,
-        public phone: string, public mobilephone: string, public photo: string, public allergies: string, public notes: string) {
+    constructor(public id: number, public firstname: string, public lastname: string, public middlename: string, public title: string,    
+        public degreeyear: string, public degreeplace: string, public gender: string, public address: string, public place: string, 
+        public birthdate: Date, public email: string, public phone: string, public mobilephone: string, public photo: string) {
     }
 }
 @Injectable()
-export class PatientBackendService {
+export class DoctorBackendService {
 
     http: Http;
     baseUrl: string;
     constructor(http: Http) {
         this.http = http;
-        this.baseUrl = '/api/patients/'
+        this.baseUrl = '/api/doctors/'
     }
-    getAllPatients(): Observable<any[]> { 
+    getAllDoctors(): Observable<any[]> { 
         // ...using get request
-        return this.http.get('/api/patients')
+        return this.http.get('/api/doctors')
             //    ...and calling .json() on the response to return data
             .map((res: Response) => <any[]>res.json())
             //                          .map(res => <Bookmark[]> res.json())
@@ -45,48 +46,48 @@ export class PatientBackendService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 
     }
-    getFilteredPatients(data: string): Observable<any[]> { 
+    getFilteredDoctors(data: string): Observable<any[]> { 
         // ...using get request
-        return this.http.get('/api/patients')
+        return this.http.get('/api/doctors')
             //    ...and calling .json() on the response to return data
             .map((res: Response) => <any[]>res.json())
                             
             .filter(item => {
                 let props = ['firstname', 'middlename', 'lastname', 'address', 'place'];
                 let match = false;
-                console.log("getFilteredPatients", data);
+                console.log("getFilteredDoctors", data);
                 for (let prop of props) {
-                     console.log("getFilteredPatients item",  item);
+                     console.log("getFilteredDoctors item",  item);
                     if (item[prop] != null && item[prop].toString().toUpperCase().indexOf(data) > -1) {
                         match = true;
                         break;
                     }
                 };
-                console.log("getFilteredPatients", data, match);
+                console.log("getFilteredDoctors", data, match);
                 return match;
             })
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }     
 
-    savePatient(newPatient: Patient): Observable<Response> {
-        let body = JSON.stringify(newPatient)
+    saveDoctor(newDoctor: Doctor): Observable<Response> {
+        let body = JSON.stringify(newDoctor)
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         return this.http.post((this.baseUrl), body, options)//.share();
     }
 
-    updatePatient(patient: IPatient): Observable<Response> {
+    updateDoctor(doctor: IDoctor): Observable<Response> {
 
-        let body = JSON.stringify(patient)
+        let body = JSON.stringify(doctor)
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.put((this.baseUrl  + patient.id), body, options)
+        return this.http.put((this.baseUrl  + doctor.id), body, options)
             .share()
     }
 
-    deletePatient(deletePatient: Patient) {
-        return this.http.delete('/api/patients/' + deletePatient.id);
+    deleteDoctor(deleteDoctor: Doctor) {
+        return this.http.delete('/api/doctors/' + deleteDoctor.id);
     }
 
 

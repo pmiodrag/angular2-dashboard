@@ -1,41 +1,35 @@
 import { Component, OnInit, Input, EventEmitter } from '@angular/core';
-import { Patient, PatientBackendService} from './patient.service';
+import { Doctor, DoctorBackendService} from './doctor.service';
 import { NotificationService  } from '../../core/notification.service';
 import {ValidationService} from '../../shared/services/validation.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-//import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
-//import {MyDatePicker} from 'mydatepicker/src/index';
-//import {FILE_UPLOAD_DIRECTIVES, FileUploader} from 'ng2-file-upload/ng2-file-upload';
-import { PatientFormPage, PatientStore } from '../state/PatientStore';
-//import { UiStateStore } from '../state/UiStateStore';
+import { DoctorFormPage, DoctorStore } from '../state/DoctorStore';
 import {ICON_CLASS, ICON_CLASS_BG} from '../../shared/constants/app.constants';
 import {MdIconRegistry} from '@angular/material';
 
 //import * as moment from 'moment';
 
 @Component({
-    selector: 'patient-form',
-    templateUrl: 'patient-form.component.html',
+    selector: 'doctor-form',
+    templateUrl: 'doctor-form.component.html',
     //host: { '[hidden]': 'hidden' }
 })
 
 
-export class PatientFormComponent  implements OnInit {
+export class DoctorFormComponent  implements OnInit {
     iconClass: string = ICON_CLASS;
     
     iconClassBg: string = ICON_CLASS_BG; 
-    public patientFormPage = PatientFormPage;     
-//    public uploader: FileUploader = new FileUploader({ url: '/patient/upload' });
-//    patientForm: ControlGroup;
-    @Input() patient: Patient;
+    public doctorFormPage = DoctorFormPage;   
+    @Input() doctor: Doctor;
     @Input() hidden: boolean = true;
-    @Input() patientheader: any;
-    @Input() patientlist: any;
+    @Input() doctorheader: any;
+    @Input() doctorlist: any;
     formTitle: string;
     submitAction: string;
     subscription: any;
-    public patientForm: FormGroup; // our model driven form
+    public doctorForm: FormGroup; // our model driven form
     public submitted: boolean = false; // keep track on whether form is submitted
     public events: any[] = []; // use later to display form changes
 
@@ -59,7 +53,7 @@ export class PatientFormComponent  implements OnInit {
   maxDate: Date = new Date(2016, 12, 15);
  
 
-    constructor(private router: Router, private _fb: FormBuilder, private patientStore: PatientStore, mdIconRegistry: MdIconRegistry, private patientService: PatientBackendService, private notificationService: NotificationService) {
+    constructor(private router: Router, private _fb: FormBuilder, private doctorStore: DoctorStore, mdIconRegistry: MdIconRegistry, private doctorService: DoctorBackendService, private notificationService: NotificationService) {
         
         mdIconRegistry.addSvgIcon('F', 'assets/images/svg/human-female.svg');
         mdIconRegistry.addSvgIcon('M', 'assets/images/svg/human-male.svg');
@@ -69,10 +63,24 @@ export class PatientFormComponent  implements OnInit {
  handleChange(value: any) {
     console.log('Changed data: ', value);
   }
-
+//  id: number;
+//    firstname: string;
+//    lastname: string;
+//    middlename: string;
+//    title: string;
+//    degreeyear: string;
+//    degreeplace: string;
+//    gender: string,
+//    address: string;
+//    place: string;
+//    birthdate: Date;
+//    email: string;
+//    phone: string;
+//    mobilephone: string;
+//    photo: string;
     ngOnInit() {
-        this.patient = new Patient(0, '', '', '', 'M', '', '', new Date(), '', '', '', '', '', '');
-        this.patientForm = this._fb.group({
+        this.doctor =  new Doctor(0, '', '', '', '', '', '', 'M', '', '', new Date(), '', '', '', '');
+        this.doctorForm = this._fb.group({
             personal: this._fb.group({
                 firstname: ['', Validators.compose([
                     Validators.required,
@@ -88,9 +96,10 @@ export class PatientFormComponent  implements OnInit {
                 photo:[''],
                 birthdate:['']
             }),
-            additional: this._fb.group({
-                allergies: [''],
-                notes: ['']
+            education: this._fb.group({                
+                title: [''],
+                degreeyear: [''],
+                degreeplace: ['']
             }),
             contact: this._fb.group({
                 email: ['', ValidationService.emailValidator],
@@ -102,15 +111,15 @@ export class PatientFormComponent  implements OnInit {
         });
 
         this.subscription = this.notificationService.getFormActionChangeEmitter()
-            .subscribe(patient => this.onFormActionChange(patient));
+            .subscribe(doctor => this.onFormActionChange(doctor));
     }
-    onFormActionChange(patient: Patient) {
-        this.patient = patient;
-        if (patient.id == -1) {
-            this.formTitle = "Add Patient";
+    onFormActionChange(doctor: Doctor) {
+        this.doctor = doctor;
+        if (doctor.id == -1) {
+            this.formTitle = "Add Doctor";
             this.submitAction = 'add';
         } else {
-            this.formTitle = "Edit Patient";
+            this.formTitle = "Edit Doctor";
             this.submitAction = 'edit';
         }
     }
@@ -118,64 +127,60 @@ export class PatientFormComponent  implements OnInit {
         this.subscription.unsubscribe();
     }
 
-    addPatient(patient) {
+    addDoctor(doctor) {
 //        if(this.uploader.queue && this.uploader.queue.length > 0) {
-//           patient.photo = this.uploader.queue[0].file.name;
+//           doctor.photo = this.uploader.queue[0].file.name;
 //        } else {
-//           patient.photo = "";
+//           doctor.photo = "";
 //        }      
-        this.patientStore.addPatient(patient)
+        this.doctorStore.addDoctor(doctor)
         this.goBack();
     }
 
-    updatePatient(patient) {
+    updateDoctor(doctor) {
 //        if(this.uploader.queue && this.uploader.queue.length > 0) {
-//           patient.photo = this.uploader.queue[0].file.name;
+//           doctor.photo = this.uploader.queue[0].file.name;
 //        } else {
-//           patient.photo = "";
+//           doctor.photo = "";
 //        }
         
-        this.patientStore.updatePatient(patient)
+        this.doctorStore.updateDoctor(doctor)
             .subscribe(
             res => { },
             err => {
                 console.log("Error");
-               // this.uiStateStore.endBackendAction();
             }
             );
         this.goBack();
     }
 
     goBack() {
-            this.router.navigate(['/patients']);
-//        this.hidden = true;
-//        this.patientheader.hidden = false;
-//        this.patientlist.hidden = false;
+            this.router.navigate(['/doctors']);
     }
 
     onSubmit() { 
       
 //        if (this.submitAction == 'add') {
-//            this.addPatient(patient);
+//            this.addDoctor(doctor);
 //        } else {
-//            this.updatePatient(patient);
+//            this.updateDoctor(doctor);
 //        }
-        let patient = this.dataToPatient();
-        patient.birthdate.setHours(12);
-        this.addPatient(patient);
+        let doctor = this.dataToDoctor();
+        console.log("On Submit", doctor)
+        doctor.birthdate.setHours(12);
+        this.addDoctor(doctor);
         this.submitted = true;
         this.goBack();
     }
-    private dataToPatient() : Patient {
-        let patient = this.patientForm;
-         return new Patient
-         (0, patient.value.personal.firstname, patient.value.personal.lastname, patient.value.personal.middlename,
-        patient.value.personal.gender, patient.value.contact.street, patient.value.contact.place, new Date(), patient.value.contact.email,
-        patient.value.contact.phone, patient.value.contact.mobilephone, patient.value.contact.photo, patient.value.additional.allergies, patient.value.additional.notes); 
+    private dataToDoctor() : Doctor {
+        let doctor = this.doctorForm;
+         return new Doctor
+         (0, doctor.value.personal.firstname, doctor.value.personal.lastname, doctor.value.personal.middlename, doctor.value.education.title, 
+        doctor.value.education.degreeyear, doctor.value.education.degreeplace, doctor.value.personal.gender, doctor.value.contact.street, doctor.value.contact.place, new Date(), doctor.value.contact.email,
+        doctor.value.contact.phone, doctor.value.contact.mobilephone, doctor.value.contact.photo); 
     }
-    setPatientFormPage(page: PatientFormPage) {
-        console.log("setPatientFormPage", this.patientForm);
-        this.patientStore.setPatientFormPage(page);
+    setDoctorFormPage(page: DoctorFormPage) {
+        this.doctorStore.setDoctorFormPage(page);
     }
 
 

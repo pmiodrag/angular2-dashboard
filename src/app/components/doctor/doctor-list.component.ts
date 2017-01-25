@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, AUTO_STYLE, Component, Input, Output, EventEmitter, trigger, state, style, animate, transition  } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Patient, PatientBackendService} from './patient.service';
+import { Doctor, DoctorBackendService} from './doctor.service';
 import { NotificationService  } from '../../core/notification.service';
 import { Sorter } from '../../shared/sorter';
 import { FilterTextboxComponent } from './filterTextbox.component';
-//import { PatientFormComponent } from './patient-form.component'
-import { PatientStore, PatientFormPage } from '../state/PatientStore';
+//import { DoctorFormComponent } from './doctor-form.component'
+import { DoctorStore, DoctorFormPage } from '../state/DoctorStore';
 import {List} from 'immutable';
 import {asObservable} from "../state/asObservable";
 import * as Rx from "rxjs/Rx";
@@ -15,9 +15,9 @@ import {MdIconRegistry} from '@angular/material';
 import { Router } from '@angular/router';
 //import {IPaginationInstance} from 'ng2-pagination';
 @Component({
-    selector: 'patient-list', 
+    selector: 'doctor-list', 
     providers: [MdIconRegistry],
-    templateUrl: 'patient-list.component.html',
+    templateUrl: 'doctor-list.component.html',
     host: { '[hidden]': 'hidden' },
     changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [
@@ -59,7 +59,7 @@ import { Router } from '@angular/router';
 })
 
 
-export class PatientListComponent {
+export class DoctorListComponent {
 //    pagination = {
 //        currentPage: 1,
 //        itemsPerPage: 5,
@@ -80,7 +80,7 @@ export class PatientListComponent {
     private showTabs: boolean = false;
     animationState: string;
     private src: string = "";
-    public patientFormPage = PatientFormPage; 
+    public doctorFormPage = DoctorFormPage; 
     iconClass: string = ICON_CLASS; 
     iconClassBg: string = ICON_CLASS_BG; 
     owner: string = PATIENT_OWNER;
@@ -88,21 +88,21 @@ export class PatientListComponent {
     toggleID: number;
     filterText: string;
 //    @Input() listDisplayModeEnabled: boolean;
-    filteredPatients: Patient[] = [];
+    filteredDoctors: Doctor[] = [];
     sorter: Sorter;
-    patient: Patient;
+    doctor: Doctor;
     @Input() hidden: boolean = false;
-//    @Input() patients: Patient[];
-//    @Input() selected: Patient;
-//    @Input() patientheader: any;
-//    @Input() patientform: any;
+//    @Input() doctors: Doctor[];
+//    @Input() selected: Doctor;
+//    @Input() doctorheader: any;
+//    @Input() doctorform: any;
     @Output() selectedChange: EventEmitter<any> = new EventEmitter();
 //    selection: string;
 //    count: number;
 //     collection = [];
-    private _patients: Rx.BehaviorSubject<List<Patient>> = new Rx.BehaviorSubject(List([]));
-    constructor(private router: Router, mdIconRegistry: MdIconRegistry, private patientService: PatientBackendService, private notificationService: NotificationService, private patientStore: PatientStore) {
-//        this.refreshPatients();
+    private _doctors: Rx.BehaviorSubject<List<Doctor>> = new Rx.BehaviorSubject(List([]));
+    constructor(private router: Router, mdIconRegistry: MdIconRegistry, private doctorService: DoctorBackendService, private notificationService: NotificationService, private doctorStore: DoctorStore) {
+//        this.refreshDoctors();
 //        this.collapse();
         mdIconRegistry.addSvgIcon('M', 'assets/images/svg/human-male.svg');
         mdIconRegistry.addSvgIcon('F', 'assets/images/svg/human-female.svg');
@@ -113,42 +113,42 @@ export class PatientListComponent {
     }
 
     ngOnInit() {
-        this.title = 'Patients';
-        this.filterText = 'Filter Patients:';
+        this.title = 'Doctors';
+        this.filterText = 'Filter Doctors:';
 //        this.listDisplayModeEnabled = false;
         this.sorter = new Sorter();
     }
-    setPatientFormPage(page: PatientFormPage) {
-        this.patientStore.setPatientFormPage(page);
+    setDoctorFormPage(page: DoctorFormPage) {
+        this.doctorStore.setDoctorFormPage(page);
     }
 
-    goToPatientDetails(patientID: string){
-        this.router.navigate(['/patients/' + patientID]);
+    goToDoctorDetails(doctorID: string){
+        this.router.navigate(['/doctors/' + doctorID]);
     }
     
         
-    listPatientTreatments(patient: Patient){
-        console.log("listPatientTreatments"+patient.id);
-        this.notificationService.emitFormActionChangeEvent(patient);
+    listDoctorTreatments(doctor: Doctor){
+        console.log("listDoctorTreatments"+doctor.id);
+        this.notificationService.emitFormActionChangeEvent(doctor);
     }
 
-//    deletePatient(patient: Patient) {
-//        this.patientStore.deletePatient(patient);
+//    deleteDoctor(doctor: Doctor) {
+//        this.doctorStore.deleteDoctor(doctor);
 //    }
-    addPatient() {
+    addDoctor() {
 //        this.hideElements();
-        this.patient = new Patient(-1, '', '', '', 'M', '', '', new Date(), '', '', '', '', '', '');
-//        this.formAction(this.patient);
+        this.doctor = new Doctor(-1, '', '', '', '', '', '', 'M', '', '', new Date(), '', '', '', '');
+//        this.formAction(this.doctor);
     }
-    editPatient(patient: Patient) {
-        this.selectedChange.next(patient);
+    editDoctor(doctor: Doctor) {
+        this.selectedChange.next(doctor);
 //        this.hideElements();
-//        this.formAction(patient);
+//        this.formAction(doctor);
     }
    
 
     showCardView(show: boolean) {
-        this.patientStore.changeView(show);
+        this.doctorStore.changeView(show);
     }
 
     sort(prop: string) {
@@ -156,13 +156,13 @@ export class PatientListComponent {
         if (prop && prop.indexOf('.')) {
 
         }
-        this.sorter.sort(this.filteredPatients, prop);
+        this.sorter.sort(this.filteredDoctors, prop);
     }
 
 
   
-  removeAccount(patient: Patient) {
-      this.patientStore.deletePatient(patient);
+  removeAccount(doctor: Doctor) {
+      this.doctorStore.deleteDoctor(doctor);
   }
 
 }

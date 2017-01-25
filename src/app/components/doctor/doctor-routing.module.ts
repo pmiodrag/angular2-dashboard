@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PatientComponent } from './patient.component';
-import { PatientListComponent } from './patient-list.component';
-import { PatientDetailComponent } from './patient-detail.component';
-import { PatientFormComponent } from './patient-form.component';
+import { DoctorComponent } from './doctor.component';
+import { DoctorListComponent } from './doctor-list.component';
+import { DoctorDetailComponent } from './doctor-detail.component';
+import { DoctorFormComponent } from './doctor-form.component';
 
 const routes: Routes = [
   { path: '',
-    component: PatientComponent,
+    component: DoctorComponent,
     children: [
-      { path: '',    component: PatientListComponent },
-      { path: 'form', component: PatientFormComponent },
-      { path: ':id', component: PatientDetailComponent }
+      { path: '',    component: DoctorListComponent },
+      { path: 'form', component: DoctorFormComponent },
+      { path: ':id', component: DoctorDetailComponent }
       
     ]
   }
@@ -21,4 +21,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class PatientRoutingModule { }
+export class DoctorRoutingModule { }

@@ -7,22 +7,22 @@ import { SortByDirective } from '../../shared/directives/sortby.directive';
 //import { CapitalizePipe } from '../../shared/pipes/capitalize.pipe';
 //import { TrimPipe } from '../../shared/pipes/trim.pipe';
 //import {MATERIAL_DIRECTIVES} from "ng2-material/index";
-//import { PatientFormComponent } from './patient-form'
-//import { PatientList } from './patient-list'
-//import { PatientHeaderComponent } from './patient-header'
-import { Patient} from './patient.service';
+//import { DoctorFormComponent } from './doctor-form'
+//import { DoctorList } from './doctor-list'
+//import { DoctorHeaderComponent } from './doctor-header'
+import { Doctor} from './doctor.service';
 import { NotificationService  } from '../../core/notification.service';
 import { AuthService } from '../auth/auth.service';
 @Component({ 
-  selector: 'patients', 
-  templateUrl: 'patient.component.html',
+  selector: 'doctors', 
+  templateUrl: 'doctor.component.html',
   host: {'[hidden]': 'hidden'}
 })
 
-export class PatientComponent {
-    selectedPatient: Patient;
+export class DoctorComponent {
+    selectedDoctor: Doctor;
     subscription: any;
-    @Input() patients: Patient[];
+    @Input() doctors: Doctor[];
     
     
    // @Output() openForm = new EventEmitter<string>();
@@ -33,7 +33,7 @@ export class PatientComponent {
 //          .subscribe(formAction => this.onFormActionChange(formAction));
 //    }
 //    onFormActionChange(item: string) {
-//        console.log("selectedNavItem patient component item = ", item, "selectedPatient", this.selectedPatient);
+//        console.log("selectedNavItem doctor component item = ", item, "selectedDoctor", this.selectedDoctor);
 //    }
 //    ngOnDestroy() {
 //        this.subscription.unsubscribe();

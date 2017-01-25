@@ -5,7 +5,7 @@ import { PageNotFoundComponent } from './page-not-found.component';
 //import { PatientsComponent } from './components/patients/patients';
 //import { TreatmentsComponent } from './components/treatments/treatments';
 //import { DiagnoseComponent } from './components/diagnose/diagnose';
-//import { DoctorsComponent} from './components/doctors/doctors';
+import { DoctorComponent} from './components/doctor/doctor.component';
 //import { DocumentsComponent} from './components/documents/documents';
 //import { AgendaComponent} from './components/agenda/agenda';
 //import { AuthComponent } from './components/auth/auth.component';
@@ -22,7 +22,7 @@ export const appRoutes: Routes = [
 //    { path: 'patient/:owner/:id/treatments', component: TreatmentsComponent },
 //    { path: 'doctor/:owner/:id/treatments', component: TreatmentsComponent },
 //    { path: 'diagnoses', component: DiagnoseComponent },
-//    { path: 'doctors', component: DoctorsComponent },
+    { path: 'doctors', loadChildren: 'app/components/doctor/doctor.module#DoctorModule' },
 //    { path: 'documents', component: DocumentsComponent },
 //    { path: 'agenda', component: AgendaComponent },
 //    { path: 'login', component: AuthComponent },

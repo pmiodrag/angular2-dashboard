@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, AUTO_STYLE, Component, Input, Output, EventEmitter, trigger, state, style, animate, transition  } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Patient, PatientBackendService} from './patient.service';
+import { Doctor, DoctorBackendService} from './doctor.service';
 import { NotificationService  } from '../../core/notification.service';
 import { Sorter } from '../../shared/sorter';
 import { FilterTextboxComponent } from './filterTextbox.component';
-//import { PatientFormComponent } from './patient-form.component'
-import { PatientStore, PatientFormPage } from '../state/PatientStore';
+import { DoctorStore, DoctorFormPage } from '../state/DoctorStore';
 import {List} from 'immutable';
 import {asObservable} from "../state/asObservable";
 import * as Rx from "rxjs/Rx";
@@ -14,11 +13,10 @@ import {PATIENT_OWNER} from '../../shared/constants/app.constants';
 import {MdIconRegistry} from '@angular/material';
 import { ActivatedRoute, Params  }    from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-//import {IPaginationInstance} from 'ng2-pagination';
 @Component({
-    selector: 'patient-detail',
+    selector: 'doctor-detail',
     providers: [MdIconRegistry],
-    templateUrl: 'patient-detail.component.html',
+    templateUrl: 'doctor-detail.component.html',
     host: { '[hidden]': 'hidden' },
     changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [
@@ -60,24 +58,24 @@ import 'rxjs/add/operator/switchMap';
 })
 
 
-export class PatientDetailComponent {
+export class DoctorDetailComponent {
     /**
     * True to show the source code for the example
     */
     public showSource: boolean = false;
     private showTabs: boolean = false;
     animationState: string;
-    private patientList: Patient[];
-    patient: Patient;
-    public patientFormPage = PatientFormPage;
+    private doctorList: Doctor[];
+    doctor: Doctor;
+    public doctorFormPage = DoctorFormPage;
     iconClass: string = ICON_CLASS; 
     iconClassBg: string = ICON_CLASS_BG; 
     owner: string = PATIENT_OWNER;
     title: string;
     toggleID: number;
 
-    private _patients: Rx.BehaviorSubject<Patient> = new Rx.BehaviorSubject(null);
-    constructor(private route: ActivatedRoute, private mdIconRegistry: MdIconRegistry, private patientService: PatientBackendService, private notificationService: NotificationService, private patientStore: PatientStore) {
+    private _doctors: Rx.BehaviorSubject<Doctor> = new Rx.BehaviorSubject(null);
+    constructor(private route: ActivatedRoute, private mdIconRegistry: MdIconRegistry, private doctorService: DoctorBackendService, private notificationService: NotificationService, private doctorStore: DoctorStore) {
 
         mdIconRegistry.addSvgIcon('M', 'assets/images/svg/human-male.svg');
         mdIconRegistry.addSvgIcon('F', 'assets/images/svg/human-female.svg');
@@ -86,18 +84,16 @@ export class PatientDetailComponent {
 
     ngOnInit() {
         let id = parseInt(this.route.snapshot.params['id'], 10);
-        this.patientStore.getPatient(id);
-      this.patientStore.getAllPatients().subscribe(
-            people => this.patientList = people,
+        this.doctorStore.getDoctor(id);
+      this.doctorStore.getAllDoctors().subscribe(
+            people => this.doctorList = people,
             error => console.error('Error: '),
-            () => {this._patients.next(this.patientList['content'].find(x => x.id == id)); console.log("this.patient", this._patients)}); 
+            () => {this._doctors.next(this.doctorList['content'].find(x => x.id == id)); console.log("this.doctor", this._doctors)}); 
          
-        
-//         console.log("patientStore patients() ", this.patientStore.patients.getValue() );
     }
 
-    setPatientFormPage(page: PatientFormPage) {
-        this.patientStore.setPatientFormPage(page);
+    setDoctorFormPage(page: DoctorFormPage) {
+        this.doctorStore.setDoctorFormPage(page);
     }
 
 }

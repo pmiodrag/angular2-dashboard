@@ -4,8 +4,13 @@
     .md-radio-inner { display: none !important; }
 </style>
 <div class="col-md-12 voffset4">
-    <md-toolbar class="col-md-12 glass">
-        <!--        <span class="col-md-1 text-deeppurpleprimary">{{formTitle}}</span>-->
+    <md-toolbar class="col-md-12 combo_blue_bg glass">
+        <div class="col-md-2"><span class="logo col-md-12 white_bg combo_blue">Patients</span></div>
+        <div class="frame frame_active small">                        
+            <a  [routerLink]="['/patients']">
+                 <i class="material-icons">people</i>
+            </a>
+        </div>
         <button md-mini-fab class="combo_blue" [ngClass]="iconClassBg" (click)="setPatientFormPage(patientFormPage.Personal)" >
             <i class="material-icons" [ngClass]="{'combo_orange': (patientStore.patientFormPage | async ) == patientFormPage.Personal}">person</i>                            
         </button> 
@@ -63,7 +68,7 @@
                     </small>
                 </div>
                 <div md-line class="col-md-12 voffset8">
-                    <md-input class="col-md-6" ngDefaultControl formControlName="middlename" id="middlename" placeholder="Middlename" align="end"  [(ngModel)]="patient.middlename" [value]="patient.middlename" ></md-input>
+                    <md-input class="col-md-6" ngDefaultControl formControlName="middlename" id="middlename" placeholder="Middlename" [(ngModel)]="patient.middlename" [value]="patient.middlename" ></md-input>
                 </div>
                 <div md-line class="col-md-12 voffset8">
                     <md-input class="col-md-6" ngDefaultControl formControlName="lastname" id="lastname" placeholder="Last name">  </md-input>
@@ -86,13 +91,13 @@
             </small>
         </div>
         <div md-line class="col-md-12 voffset8">
-            <md-input class="col-md-6" ngDefaultControl formControlName="place" id="place" placeholder="Place" align="end"></md-input>
+            <md-input class="col-md-6" ngDefaultControl formControlName="place" id="place" placeholder="Place"></md-input>
         </div>
         <div md-line class="col-md-12 voffset8">
-            <md-input class="col-md-6" ngDefaultControl formControlName="street" id="street" placeholder="Street" align="end"></md-input>
+            <md-input class="col-md-6" ngDefaultControl formControlName="street" id="street" placeholder="Street"></md-input>
         </div>
         <div md-line class="col-md-12 voffset8">
-            <md-input class="col-md-6" ngDefaultControl formControlName="phone" id="phone" placeholder="Phone number" align="end"></md-input>
+            <md-input class="col-md-6" ngDefaultControl formControlName="phone" id="phone" placeholder="Phone number"></md-input>
         </div>
         <div md-line class="col-md-12 voffset8">
             <md-input class="col-md-6" ngDefaultControl formControlName="mobilephone"  id="mobilephone" placeholder="Mobile Phone number" ></md-input>

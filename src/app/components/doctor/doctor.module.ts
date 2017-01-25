@@ -1,36 +1,29 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { PatientComponent } from './patient.component';
+import { DoctorComponent } from './doctor.component';
 import { FilterTextboxComponent } from './filterTextbox.component';
-import { PatientHeaderComponent } from './patient-header.component';
-import { PatientDetailComponent } from './patient-detail.component';
-import { PatientListComponent } from './patient-list.component';
-import { PatientFormComponent } from './patient-form.component';
-import { PatientRoutingModule }   from './patient-routing.module';
+import { DoctorHeaderComponent } from './doctor-header.component';
+import { DoctorDetailComponent } from './doctor-detail.component';
+import { DoctorListComponent } from './doctor-list.component';
+import { DoctorFormComponent } from './doctor-form.component';
+import { DoctorRoutingModule }   from './doctor-routing.module';
 import { SharedModule }        from '../../shared/shared.module';
-import { PatientBackendService} from './patient.service';
-import { PatientStore } from '../state/PatientStore';
+import { DoctorBackendService} from './doctor.service';
+import { DoctorStore } from '../state/DoctorStore';
 import { MaterialModule } from '@angular/material';
-//import { DatepickerModule } from 'angular2-material-datepicker';
 import {CalendarModule} from 'primeng/primeng';
 import { Md2Module }  from 'md2';
 @NgModule({
-    imports: [ SharedModule.forRoot(), MaterialModule.forRoot(),PatientRoutingModule, CalendarModule, Md2Module.forRoot() ],
+    imports: [ SharedModule.forRoot(), MaterialModule.forRoot(), DoctorRoutingModule, CalendarModule, Md2Module.forRoot() ],
     declarations: [
-        PatientComponent,
-        PatientHeaderComponent,
-        PatientListComponent,
-        PatientDetailComponent,
-        PatientFormComponent,
+        DoctorComponent,
+        DoctorHeaderComponent,
+        DoctorListComponent,
+        DoctorDetailComponent,
+        DoctorFormComponent,
         FilterTextboxComponent
-//        PatientFormComponent
     ],
-    providers: [PatientBackendService, PatientStore],
+    providers: [DoctorBackendService, DoctorStore],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
-//    exports: [
-//        PatientsComponent
-//    ],
-//    imports: [MaterialModule.forRoot()],
-//    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class PatientModule {
+export class DoctorModule {
 }

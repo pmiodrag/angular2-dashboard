@@ -2,7 +2,7 @@
     width: 50% !important;
     min-height: 600px !important;
     position: relative;
-    margin: 5% auto !important;
+    margin: 10% auto !important;
     border-radius: 8px;
     /*border: 2px solid #659CEF;*/
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2), 0px 2px 6px rgba(0, 0, 0, 0.4);
@@ -16,7 +16,7 @@
     
 	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2), 0px 2px 6px rgba(0, 0, 0, 0.4);
 }
-#patient {
+#item {
 	width: 100% !important;
 	height: 100% !important;
 	position: relative;

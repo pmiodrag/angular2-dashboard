@@ -23,19 +23,15 @@ export class DoctorStore {
     // this method should be supported in RXJS 2
     //    public doctors: Observable<List<Doctor>> =  this._doctors.asObservable();
 
-    constructor(private doctorBackendService: DoctorBackendService) {
-        
-          if(this.doctorList != null) {
-        console.log("DoctorStore constructor");
+    constructor(private doctorBackendService: DoctorBackendService) {        
+        if(this.doctorList != null) {
+            console.log("DoctorStore constructor");
          } else {
-         console.log("DoctorStore constructor loadInitialData");
+            console.log("DoctorStore constructor loadInitialData");
              this.loadInitialData();
-         }
-        
+         }        
     }
-//    ngOnInit() {
-//         console.log("DoctorStore ngOnInit this._doctors.getValue()", this._doctors.getValue());
-//    }
+    
     get showCardView() {
         return  asObservable(this._showCardView);
     }

@@ -4,7 +4,6 @@ import { Patient, PatientBackendService} from './patient.service';
 import { NotificationService  } from '../../core/notification.service';
 import { Sorter } from '../../shared/sorter';
 import { FilterTextboxComponent } from './filterTextbox.component';
-//import { PatientFormComponent } from './patient-form.component'
 import { PatientStore, PatientFormPage } from '../state/PatientStore';
 import {List} from 'immutable';
 import {asObservable} from "../state/asObservable";

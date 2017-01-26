@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Response} from "@angular/http";
-import {Diagnose, DiagnoseBackendService} from "../../services/DiagnoseBackendService";
+import {Diagnose, DiagnoseBackendService} from "../diagnose/diagnose.service";
 import {Observable} from "rxjs/Observable";
 import {Subject} from "rxjs/Subject";
 import {List} from 'immutable';
@@ -10,7 +10,13 @@ import {BehaviorSubject} from "rxjs/Rx";
 @Injectable()
 export class DiagnoseStore {
 
+    private diagnoseList: Diagnose[];
     private _diagnoses: BehaviorSubject<List<Diagnose>> = new BehaviorSubject(List([]));
+    private _selected : BehaviorSubject<Diagnose> = new BehaviorSubject<Diagnose>(null);
+    private _showCardView: BehaviorSubject<boolean> = new BehaviorSubject(true);
+    private _startIndex: BehaviorSubject<number> = new BehaviorSubject(0);
+    private _endIndex: BehaviorSubject<number> = new BehaviorSubject(3);
+    private _diagnosesSize: BehaviorSubject<number> = new BehaviorSubject(0);
 
     constructor(private diagnoseBackendService: DiagnoseBackendService) {
         this.loadInitialData();
@@ -20,55 +26,42 @@ export class DiagnoseStore {
         return asObservable(this._diagnoses);
     }
     
-  
-    
     get diagnosesSubject() {
        return this.diagnoseBackendService.getAllDiagnoses()
     }
-
+//    getAllDiagnoses() {
+//        return this.diagnoseBackendService.getAllDiagnoses()
+//    }
     loadInitialData() {
+        console.log("DiagnoseStore loadInitialData");
         this.diagnoseBackendService.getAllDiagnoses()
             .subscribe(
-            res => {
-                let diagnoses = (<Diagnose[]>res.json()).map((diagnose: any) =>
-                    new Diagnose(
-                        diagnose.id,
-                        diagnose.name,
-                        diagnose.description
-                      
-                    ))
-                this._diagnoses.next(List(diagnoses));
-            },
-            err => console.log("Error retrieving Diagnoses")
-            );
-
+                people => this.diagnoseList = people,
+                error => console.error('Error: '),
+                () => { this._diagnoses.next(List( <Diagnose[]>this.diagnoseList['content']))
+                 console.log('Completed!',  this.diagnoseList['content'])}
+            )
     }
+    
     filterData(data) {
         this.diagnoseBackendService.getAllDiagnoses()
-            .subscribe(
-            res => {
-               let diagnoses = (<Diagnose[]>res.json()).map((diagnose: any) =>
-                    new Diagnose(
-                        diagnose.id,
-                        diagnose.name,
-                        diagnose.description
-                    ))                  
-                    .filter(item => {
-                        let props = ['name', 'description'];
-                        let match = false;
-                        for (let prop of props) {
-                            if (item[prop] != null && item[prop].toString().toUpperCase().indexOf(data) > -1) {
-                                match = true;
-                                break;
-                            }
-                        };
-                        return match;
-                    })
-                this._diagnoses.next(List(diagnoses));
-            },
-            err => console.log("Error retrieving Diagnoses")
-            );
-    }
+        .subscribe(
+            diagnose => this.diagnoseList = diagnose,
+            error => console.error('Error: '),
+            () => { this._diagnoses.next(List( <Diagnose[]>this.diagnoseList['content'].filter(item => {
+                let props = ['name', 'description'];
+                let match = false;
+                for (let prop of props) {
+                    if (item[prop] != null && item[prop].toString().toUpperCase().indexOf(data) > -1) {
+                        match = true;
+                        break;
+                    }
+                };
+                return match;
+            })))}
+        )
+    }  
+    
     addDiagnose(newDiagnose: Diagnose) {
         this.diagnoseBackendService.saveDiagnose(newDiagnose).subscribe(
             res => {

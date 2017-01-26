@@ -21,13 +21,12 @@ export const appRoutes: Routes = [
 //    { path: 'patient/:id/gallery', component: GalleryComponent },
 //    { path: 'patient/:owner/:id/treatments', component: TreatmentsComponent },
 //    { path: 'doctor/:owner/:id/treatments', component: TreatmentsComponent },
-//    { path: 'diagnoses', component: DiagnoseComponent },
+    { path: 'diagnoses',  loadChildren: 'app/components/diagnose/diagnose.module#DiagnoseModule' },
     { path: 'doctors', loadChildren: 'app/components/doctor/doctor.module#DoctorModule' },
 //    { path: 'documents', component: DocumentsComponent },
 //    { path: 'agenda', component: AgendaComponent },
 //    { path: 'login', component: AuthComponent },
     { path: 'dashboard', component: DashboardComponent },
-//     { path: '**', pathMatch: 'full', component: DashboardComponent}
 
 ];
 

@@ -1,0 +1,50 @@
+
+<div class="row voffset4" *ngIf="authService.loggedIn()">
+    <div class="col-md-12">
+   <div class="voffset4">
+    <div class="col-md-12">
+        <div class="navbar">
+            <filter-textbox class="navbar-right" (changed)="filterChanged($event)"></filter-textbox>
+        </div>
+    </div>
+</div>
+<div class="col-md-12">
+    <md-toolbar class="col-md-12 combo_blue_bg glass"> 
+        <div class="btn-block col-md-6">
+            <div class="col-md-2"><span class="logo col-md-12 white_bg combo_blue">Diagnoses</span></div>
+            <div class="frame frame_active small">                        
+                <a  [routerLink]="['/diagnoses']">
+                    <i class="material-icons">note</i>
+                </a>
+            </div>
+        </div>
+    </md-toolbar>
+</div>
+    <div id="card" class="gradient_card"> 
+    <md-list>
+          <md-list-item class="col-md-12 voffset2">               
+            <div md-line class="col-md-4 voffset8 action_btn">       
+               <md-input id="name" placeholder="Add diagnose" [(ngModel)]="name"></md-input>
+                  <div class="frame frame_active small pull-right">     
+                <a  (click)="addDiagnose()" >
+                 <i class="material-icons combo_blue">plus_one</i>
+              </a>
+                  </div>
+        </div>     
+          </md-list-item>
+         <md-list-item class="md-1-line col-md-6 voffset4 action_btn" *ngFor="let diagnose of diagnoseStore.diagnoses | async">
+                         <div md-line>
+                <span class="demo-2"> {{diagnose.name}}</span>
+                  <div class="frame frame_active small pull-right">     
+                <a  (click)="deleteDiagnose(diagnose)" >
+                 <i class="material-icons combo_blue">delete</i>
+              </a>
+                  </div>
+            </div>           
+            <md-divider></md-divider>
+        </md-list-item>
+       
+    </md-list>
+          </div>
+</div>
+</div>

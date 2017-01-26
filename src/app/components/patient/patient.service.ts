@@ -37,7 +37,7 @@ export class PatientBackendService {
     }
     getAllPatients(): Observable<any[]> { 
         // ...using get request
-        return this.http.get('/api/patients')
+        return this.http.get(this.baseUrl)
             //    ...and calling .json() on the response to return data
             .map((res: Response) => <any[]>res.json())
             //                          .map(res => <Bookmark[]> res.json())
@@ -47,7 +47,7 @@ export class PatientBackendService {
     }
     getFilteredPatients(data: string): Observable<any[]> { 
         // ...using get request
-        return this.http.get('/api/patients')
+        return this.http.get(this.baseUrl)
             //    ...and calling .json() on the response to return data
             .map((res: Response) => <any[]>res.json())
                             
@@ -72,7 +72,7 @@ export class PatientBackendService {
         let body = JSON.stringify(newPatient)
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        return this.http.post((this.baseUrl), body, options)//.share();
+        return this.http.post(this.baseUrl, body, options)//.share();
     }
 
     updatePatient(patient: IPatient): Observable<Response> {
@@ -86,7 +86,7 @@ export class PatientBackendService {
     }
 
     deletePatient(deletePatient: Patient) {
-        return this.http.delete('/api/patients/' + deletePatient.id);
+        return this.http.delete(this.baseUrl + deletePatient.id);
     }
 
 

@@ -1,15 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-//import { TreatmentService } from '../../services/treatmentService';
-//import { Sorter } from '../../shared/sorter';
 import { FilterTextboxComponent } from './filterTextbox.component';
 import { SortByDirective } from '../../shared/directives/sortby.directive';
-//import { CapitalizePipe } from '../../shared/pipes/capitalize.pipe';
-//import { TrimPipe } from '../../shared/pipes/trim.pipe';
-//import {MATERIAL_DIRECTIVES} from "ng2-material/index";
-//import { PatientFormComponent } from './patient-form'
-//import { PatientList } from './patient-list'
-//import { PatientHeaderComponent } from './patient-header'
 import { Patient} from './patient.service';
 import { NotificationService  } from '../../core/notification.service';
 import { AuthService } from '../auth/auth.service';

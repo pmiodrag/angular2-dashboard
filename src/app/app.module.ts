@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-//import { PatientModule } from './components/patient/patient.module';
-//import { DoctorModule } from './components/doctor/doctor.module';
 import { DashboardModule } from './components/dashboard/dashboard.module';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';

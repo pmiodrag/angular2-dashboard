@@ -211,7 +211,7 @@ input.typeahead-input:-ms-input-placeholder {
 .mini {   
     height: 35.99px !important;
     width: 35.99px !important;  
-    margin: 30px auto !important;
+    margin: 5px auto !important;
     position: relative;
 }
 .xs {   

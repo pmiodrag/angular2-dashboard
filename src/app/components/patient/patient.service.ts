@@ -72,6 +72,7 @@ export class PatientBackendService {
         let body = JSON.stringify(newPatient)
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
+        console.log("save patient body", body);
         return this.http.post(this.baseUrl, body, options)//.share();
     }
 

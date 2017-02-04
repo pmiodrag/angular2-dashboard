@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NotificationService  } from '../../core/notification.service';
 import { Doctor} from './doctor.service';
 import {ICON_CLASS, ICON_CLASS_BG} from '../../shared/constants/app.constants';
-import { DoctorStore } from '../state/DoctorStore';
+import { DoctorStore } from  './DoctorStore';
 //import { FilterTextboxComponent } from './filterTextbox.component';
 @Component({
     selector: 'doctor-header',

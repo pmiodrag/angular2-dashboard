@@ -1,14 +1,14 @@
 import {Injectable} from "@angular/core";
 import {Response} from "@angular/http";
-import {Patient, PatientBackendService} from "../patient/patient.service";
+import {Patient, PatientBackendService} from "./patient.service";
 import {Observable} from "rxjs/Observable";
 import {Subject} from "rxjs/Subject";
 import {List} from 'immutable';
-import {asObservable} from "./asObservable";
+import {asObservable} from "../state/asObservable";
 import {BehaviorSubject} from "rxjs/Rx";
 
 
-export enum PatientFormPage { Personal, Photo, Contact, HealthInfo, Summary}
+export enum PatientFormPage { Personal, Gallery, Contact, HealthInfo, Treatments, Summary}
 
 @Injectable()
 export class PatientStore {
@@ -22,20 +22,21 @@ export class PatientStore {
     private _patientsSize: BehaviorSubject<number> = new BehaviorSubject(0);
     // this method should be supported in RXJS 2
     //    public patients: Observable<List<Patient>> =  this._patients.asObservable();
-
+    static counter = 0;
+    id = 0
     constructor(private patientBackendService: PatientBackendService) {
-        
-          if(this.patientList != null) {
-        console.log("PatientStore constructor");
+        this.id= PatientStore.counter++;
+         console.log("PatientStore constructor this.id", this.id);
+//         console.log("PatientStore constructor this._patients.getValue()", this._patients.getValue());
+          if(this._patients != null && this._patients.getValue().size != 0) {
+//        console.log("PatientStore constructor");
          } else {
          console.log("PatientStore constructor loadInitialData");
              this.loadInitialData();
          }
         
     }
-//    ngOnInit() {
-//         console.log("PatientStore ngOnInit this._patients.getValue()", this._patients.getValue());
-//    }
+    
     get showCardView() {
         return  asObservable(this._showCardView);
     }
@@ -77,13 +78,15 @@ export class PatientStore {
     }
     
     getPatient(id) {
-         this.patientBackendService.getAllPatients()
-        .subscribe(
-            people => this.patientList = people,
-            error => console.error('Error: '),
-            () => { console.log('getPatient by id!',  this.patientList['content'].find(x => x.id == id)); 
-            this._selected.next(<Patient>this.patientList['content'].find(x => x.id == id))}
-        )
+        console.log("this._patients getPatient() value", this._patients.getValue());
+        this._selected.next(<Patient>this._patients.getValue().find(x => x.id == id));
+//         this.patientBackendService.getAllPatients()
+//        .subscribe(
+//            people => this.patientList = people,
+//            error => console.error('Error: '),
+//            () => { console.log('getPatient by id!',  this.patientList['content'].find(x => x.id == id)); 
+//            this._selected.next(<Patient>this.patientList['content'].find(x => x.id == id))}
+//        )
 //       if(this.patientList != null) {
 //            return this._patients.getValue().find(x => x.id == id);
 //       } else {

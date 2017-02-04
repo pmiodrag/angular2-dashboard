@@ -7,11 +7,11 @@ import { Router } from '@angular/router';
 //import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 //import {MyDatePicker} from 'mydatepicker/src/index';
 //import {FILE_UPLOAD_DIRECTIVES, FileUploader} from 'ng2-file-upload/ng2-file-upload';
-import { PatientFormPage, PatientStore } from '../state/PatientStore';
+import { PatientFormPage, PatientStore } from './PatientStore';
 //import { UiStateStore } from '../state/UiStateStore';
 import {ICON_CLASS, ICON_CLASS_BG} from '../../shared/constants/app.constants';
 import {MdIconRegistry} from '@angular/material';
-
+import {DomSanitizer} from '@angular/platform-browser';
 //import * as moment from 'moment';
 
 @Component({
@@ -52,23 +52,23 @@ export class PatientFormComponent  implements OnInit {
         }];
 
   disabled: boolean = true;
-  date: Date = new Date(2016, 9, 15);
-  time: Date = new Date(1, 1, 1, 12, 10);
-  datetime: Date = new Date(2016, 9, 15, 12, 10);
-  minDate: Date = new Date(2016, 7, 15);
-  maxDate: Date = new Date(2016, 12, 15);
+//  date: Date = new Date(2016, 9, 15);
+//  time: Date = new Date(1, 1, 1, 12, 10);
+//  datetime: Date = new Date(2016, 9, 15, 12, 10);
+//  minDate: Date = new Date(2016, 7, 15);
+//  maxDate: Date = new Date(2016, 12, 15);
  
 
-    constructor(private router: Router, private _fb: FormBuilder, private patientStore: PatientStore, mdIconRegistry: MdIconRegistry, private patientService: PatientBackendService, private notificationService: NotificationService) {
+    constructor(private router: Router, private _fb: FormBuilder, private patientStore: PatientStore, mdIconRegistry: MdIconRegistry, private sanitizer: DomSanitizer, private patientService: PatientBackendService, private notificationService: NotificationService) {
         
         mdIconRegistry.addSvgIcon('F', 'assets/images/svg/human-female.svg');
         mdIconRegistry.addSvgIcon('M', 'assets/images/svg/human-male.svg');
         mdIconRegistry.addSvgIcon('identification-card', 'assets/images/svg/account-card-details.svg');
       
     }
- handleChange(value: any) {
-    console.log('Changed data: ', value);
-  }
+    handleChange(value: any) {
+        console.log('Changed data: ', value);
+    }
 
     ngOnInit() {
         this.patient = new Patient(0, '', '', '', 'M', '', '', new Date(), '', '', '', '', '', '');
@@ -100,7 +100,7 @@ export class PatientFormComponent  implements OnInit {
                 mobilephone: ['']
             })
         });
-
+        this.setPatientFormPage(PatientFormPage.Personal);
         this.subscription = this.notificationService.getFormActionChangeEmitter()
             .subscribe(patient => this.onFormActionChange(patient));
     }
@@ -174,9 +174,9 @@ export class PatientFormComponent  implements OnInit {
         patient.value.contact.phone, patient.value.contact.mobilephone, patient.value.contact.photo, patient.value.additional.allergies, patient.value.additional.notes); 
     }
     setPatientFormPage(page: PatientFormPage) {
-        console.log("setPatientFormPage", this.patientForm);
         this.patientStore.setPatientFormPage(page);
     }
+    
 
 
 }

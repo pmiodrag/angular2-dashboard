@@ -1,32 +1,21 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { NotificationService  } from '../../core/notification.service';
 import { Patient} from './patient.service';
 import {ICON_CLASS, ICON_CLASS_BG} from '../../shared/constants/app.constants';
-import { PatientStore } from '../state/PatientStore';
+import { PatientStore } from './PatientStore';
 //import { FilterTextboxComponent } from './filterTextbox.component';
 @Component({
     selector: 'patient-header',
-    templateUrl: 'patient-header.component.html',
-    host: { '[hidden]': 'hidden' }
+    templateUrl: 'patient-header.component.html'
 })
 export class PatientHeaderComponent {
-    pagination = {
-        currentPage: 1,
-        itemsPerPage: 5,
-        totalItems: 24
-    };
-    start: number = 0;
-    end: number = 3;
-    availableLength: Array<number> = [5, 10, 20];
     iconClass: string = ICON_CLASS; 
     iconClassBg: string = ICON_CLASS_BG; 
 //    @Input() hidden: boolean = false;
 //    @Input() patientform: any;
 //    @Input() patientlist: any;
     patient: Patient;
-    listDisplayModeEnabled: boolean;
 
-    constructor(private notificationService: NotificationService, private patientStore: PatientStore) {
+    constructor(private patientStore: PatientStore) {
      //   this.refreshPatients();
     }
 

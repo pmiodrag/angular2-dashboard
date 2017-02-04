@@ -10,14 +10,14 @@ import { CustomSlice } from './pipes/slice.pipe';
 import { ListToDict } from './pipes/listtodict.pipe';
 import { Sorter } from './sorter';
 //import { MaterialModule } from '@angular/material';
-import { StoreModule } from '../components/state/store.module';
+//import { StoreModule } from '../components/state/store.module';
 
 //import { FilterTextboxComponent } from './directives/filterTextbox.component';
 
 @NgModule({
     imports: [CommonModule],
     declarations: [ValuesPipe, CapitalizePipe, TrimPipe, CustomSlice, ListToDict, SortByDirective],
-    exports: [ CommonModule, RouterModule, FormsModule, ReactiveFormsModule, StoreModule, ValuesPipe, CapitalizePipe, TrimPipe, CustomSlice, ListToDict, SortByDirective],
+    exports: [ CommonModule, RouterModule, FormsModule, ReactiveFormsModule, ValuesPipe, CapitalizePipe, TrimPipe, CustomSlice, ListToDict, SortByDirective],
 })
 
 export class SharedModule {

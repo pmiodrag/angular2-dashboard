@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {ICON_CLASS} from '../../shared/constants/app.constants';
 import { Diagnose, DiagnoseBackendService } from './diagnose.service';
-import { DiagnoseStore } from '../state/DiagnoseStore';
+import { DiagnoseStore } from './DiagnoseStore';
 import { NotificationService  } from '../../core/notification.service';
 import { AuthService } from '../auth/auth.service';
 import * as Rx from "rxjs/Rx";

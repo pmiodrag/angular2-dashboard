@@ -4,7 +4,7 @@ import {Doctor, DoctorBackendService} from "../doctor/doctor.service";
 import {Observable} from "rxjs/Observable";
 import {Subject} from "rxjs/Subject";
 import {List} from 'immutable';
-import {asObservable} from "./asObservable";
+import {asObservable} from "../state/asObservable";
 import {BehaviorSubject} from "rxjs/Rx";
 
 

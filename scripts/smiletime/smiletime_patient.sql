@@ -40,7 +40,7 @@ CREATE TABLE `patient` (
   `allergies` varchar(1000) DEFAULT NULL,
   `notes` varchar(10000) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,7 +49,7 @@ CREATE TABLE `patient` (
 
 LOCK TABLES `patient` WRITE;
 /*!40000 ALTER TABLE `patient` DISABLE KEYS */;
-INSERT INTO `patient` VALUES (3,'Miodrag','Pavkovic','','Kragujevacka 29','Novi Sad','1111','2222','mpavkovic@gmail.com','M','2016-12-25 00:00:00',NULL,NULL,NULL);
+INSERT INTO `patient` VALUES (3,'Miodrag','Pavkovic','','Kragujevacka 29','Novi Sad','1111','2222','mpavkovic@gmail.com','M','2016-12-25 00:00:00',NULL,NULL,NULL),(5,'Miroslav','Pavkovic','','Kragujevacka 29','Novi Sad','','','mira.pavk@gmail.com','M','2017-01-31 00:00:00',NULL,'',''),(6,'zeljka','stanisic','','Kragujevacka 29','Novi Sad','','','zstanisic@gmail.com','F','2017-01-31 00:00:00',NULL,'','');
 /*!40000 ALTER TABLE `patient` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -62,4 +62,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-29 18:52:23
+-- Dump completed on 2017-02-04 16:36:14

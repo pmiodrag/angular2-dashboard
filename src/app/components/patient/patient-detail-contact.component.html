@@ -1,0 +1,32 @@
+<md-list>
+    <md-list-item class="badge glass dark_blue action_btn col-md-6">
+        <i class="material-icons combo_blue" >contact_mail</i>
+        <span class="hoffset1">CONTACT DATA</span>
+    </md-list-item>
+    <md-list-item class="col-md-6 dark_blue action_btn">
+        <p md-line>
+            <span>  <i class="material-icons combo_blue">contact_mail</i> </span>
+            <span class="dark_blue"> {{(patientStore.selected | async)?.email}} </span>
+        </p>
+    </md-list-item>
+    <md-list-item class="col-md-6 action_btn">
+        <p md-line>
+            <span>  <i class="material-icons combo_blue">home</i> </span>
+            <span class="dark_blue"> {{(patientStore.selected | async)?.address}}, </span>
+            <span class="dark_blue"> {{(patientStore.selected | async)?.place}} </span>
+        </p>
+    </md-list-item>
+    <md-list-item class="col-md-6 action_btn">
+        <p md-line>
+            <span><i class="material-icons combo_blue">contact_phone</i> </span>
+            <span class="dark_blue"> {{(patientStore.selected | async)?.phone}} </span>
+        </p>
+    </md-list-item>
+    <md-list-item class="col-md-6 action_btn">
+        <p md-line>
+            <span>  <i class="material-icons combo_blue">smartphone</i> </span>
+            <span class="dark_blue"> {{(patientStore.selected | async)?.mobilephone}} </span>
+        </p>
+    </md-list-item>
+
+</md-list>

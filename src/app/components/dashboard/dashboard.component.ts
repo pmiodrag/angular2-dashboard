@@ -1,6 +1,4 @@
 import { Component} from '@angular/core';
-//import { DiagnoseStore } from '../state/DiagnoseStore';
-//import { PatientStore } from '../state/PatientStore';
 import { ICON_CLASS_BG } from '../../shared/constants/app.constants';
 import { AuthService } from '../auth/auth.service';
 

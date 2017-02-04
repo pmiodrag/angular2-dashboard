@@ -5,10 +5,10 @@ import { SortByDirective } from '../../shared/directives/sortby.directive';
 import { Patient} from './patient.service';
 import { NotificationService  } from '../../core/notification.service';
 import { AuthService } from '../auth/auth.service';
+import { PatientStore } from './PatientStore';
 @Component({ 
   selector: 'patients', 
   templateUrl: 'patient.component.html',
-  host: {'[hidden]': 'hidden'}
 })
 
 export class PatientComponent {
@@ -19,7 +19,9 @@ export class PatientComponent {
     
    // @Output() openForm = new EventEmitter<string>();
    // formAction : string;
-    constructor( public authService: AuthService, private notificationService: NotificationService ) { }
+    constructor( private patientStore: PatientStore, public authService: AuthService, private notificationService: NotificationService ) {
+        console.log("PatientComponent patientStore", patientStore);
+     }
 //    ngOnInit() {
 //        this.subscription = this.notificationService.getFormActionChangeEmitter()
 //          .subscribe(formAction => this.onFormActionChange(formAction));

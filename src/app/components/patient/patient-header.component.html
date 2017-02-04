@@ -1,4 +1,4 @@
- <div class="voffset4">
+<div class="voffset4">
     <div class="col-md-12">
         <div class="navbar">
             <filter-textbox class="navbar-right" (changed)="filterChanged($event)"></filter-textbox>
@@ -7,29 +7,18 @@
 </div>
 <div class="col-md-12">
     <md-toolbar class="col-md-12 combo_blue_bg glass"> 
-         <div class="btn-block col-md-6">
-        <div class="col-md-2"><span class="logo col-md-12 white_bg combo_blue">Patients</span></div>
-        <div class="frame frame_active small">                        
-            <a  [routerLink]="['/patients']">
-                 <i class="material-icons">people</i>
-            </a>
+        <div class="btn-block col-md-6">
+            <div class="col-md-2"><span class="logo col-md-12 white_bg combo_blue">Patients</span></div>
+            <div class="frame frame_active small">                        
+                <a  [routerLink]="['/patients']">
+                    <i class="material-icons">people</i>
+                </a>
+            </div>
+            <div class="frame hoffset3 small">                        
+                <a  [routerLink]="['/patients/form']">
+                    <i class="material-icons">person_add</i>
+                </a>
+            </div>
         </div>
-        <div class="frame hoffset3 small">                        
-            <a  [routerLink]="['/patients/form']">
-                 <i class="material-icons">person_add</i>
-            </a>
-        </div>
-<!--          <button md-mini-fab [ngClass]="iconClassBg" [routerLink]="['/patients/form']" >
-            <i class="material-icons" [ngClass]="iconClass">person_add</i>                            
-        </button>  -->
-         
-<!--        <a  md-button class="md-icon-button" [ngClass]="iconClass" (click)="showCardView(true)"  [class.active]="!listDisplayModeEnabled">
-            <i class="material-icons">apps</i>                        
-        </a>
-        <a  md-button class="md-icon-button" [ngClass]="iconClass" (click)="showCardView(false)" [class.active]="listDisplayModeEnabled">
-            <i class="material-icons">format_list_numbered</i>                         
-        </a> -->
-         </div>
-<!--        <md-pagination [model]="pagination" (on-pagination-change)="detectChange($event)" [items-per-page-options]="availableLength"></md-pagination>      -->
     </md-toolbar>
 </div>

@@ -1,0 +1,12 @@
+<md-list>  
+    <md-list-item class="badge glass action_btn col-md-6">
+        <i class="material-icons combo_blue" >person</i>
+        <span class="hoffset1 dark_blue">PERSONAL DATA</span>                    
+    </md-list-item>
+    <md-list-item class="col-md-6 action_btn">
+        <p md-line>
+            <span><i class="material-icons combo_blue">account_box</i> </span>
+            <span class="dark_blue"> {{(patientStore.selected | async)?.birthdate}} </span>
+        </p>
+    </md-list-item> 
+</md-list>

@@ -5,12 +5,15 @@ import { PatientHeaderComponent } from './patient-header.component';
 import { PatientDetailComponent } from './patient-detail.component';
 import { PatientListComponent } from './patient-list.component';
 import { PatientFormComponent } from './patient-form.component';
+import { PatientDetailPersonalComponent } from './patient-detail-personal.component';
+import { PatientDetailContactComponent } from './patient-detail-contact.component';
+import { PatientDetailGalleryComponent } from './patient-detail-gallery.component';
+import { PatientDetailHealthComponent } from './patient-detail-health.component';
 import { PatientRoutingModule }   from './patient-routing.module';
 import { SharedModule }        from '../../shared/shared.module';
 import { PatientBackendService} from './patient.service';
-import { PatientStore } from '../state/PatientStore';
+import { PatientStore } from './PatientStore';
 import { MaterialModule } from '@angular/material';
-//import { DatepickerModule } from 'angular2-material-datepicker';
 import {CalendarModule} from 'primeng/primeng';
 import { Md2Module }  from 'md2';
 @NgModule({
@@ -20,9 +23,12 @@ import { Md2Module }  from 'md2';
         PatientHeaderComponent,
         PatientListComponent,
         PatientDetailComponent,
+        PatientDetailPersonalComponent,
+        PatientDetailContactComponent,
+        PatientDetailGalleryComponent,
+        PatientDetailHealthComponent,
         PatientFormComponent,
         FilterTextboxComponent
-//        PatientFormComponent
     ],
     providers: [PatientBackendService, PatientStore],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

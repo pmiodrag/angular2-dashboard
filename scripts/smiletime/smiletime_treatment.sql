@@ -28,14 +28,14 @@ CREATE TABLE `treatment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `patientid` int(11) NOT NULL,
   `treatmentdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `diagnose` varchar(500) NOT NULL,
+  `diagnoseid` int(11) NOT NULL,
   `therapy` varchar(500) NOT NULL,
   `price` int(11) DEFAULT '0',
   `doctorid` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `patientId_idx` (`patientid`),
   CONSTRAINT `patientId` FOREIGN KEY (`patientid`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,6 +44,7 @@ CREATE TABLE `treatment` (
 
 LOCK TABLES `treatment` WRITE;
 /*!40000 ALTER TABLE `treatment` DISABLE KEYS */;
+INSERT INTO `treatment` VALUES (4,3,'2017-02-03 12:53:01',0,'dfds',1000,1),(5,3,'2017-02-04 12:51:13',51,'dsfsdf',1221,1),(6,3,'2017-02-04 14:00:34',51,'ksdjfksdj fjkdsajfksd jkldsafjkl',1000,1);
 /*!40000 ALTER TABLE `treatment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-29 18:52:23
+-- Dump completed on 2017-02-04 16:36:15

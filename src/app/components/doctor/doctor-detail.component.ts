@@ -4,13 +4,14 @@ import { Doctor, DoctorBackendService} from './doctor.service';
 import { NotificationService  } from '../../core/notification.service';
 import { Sorter } from '../../shared/sorter';
 import { FilterTextboxComponent } from './filterTextbox.component';
-import { DoctorStore, DoctorFormPage } from '../state/DoctorStore';
+import { DoctorStore, DoctorFormPage } from './DoctorStore';
 import {List} from 'immutable';
 import {asObservable} from "../state/asObservable";
 import * as Rx from "rxjs/Rx";
 import {ICON_CLASS, ICON_CLASS_BG} from '../../shared/constants/app.constants';
 import {PATIENT_OWNER} from '../../shared/constants/app.constants';
 import {MdIconRegistry} from '@angular/material';
+import {DomSanitizer} from '@angular/platform-browser';
 import { ActivatedRoute, Params  }    from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 @Component({
@@ -75,10 +76,10 @@ export class DoctorDetailComponent {
     toggleID: number;
 
     private _doctors: Rx.BehaviorSubject<Doctor> = new Rx.BehaviorSubject(null);
-    constructor(private route: ActivatedRoute, private mdIconRegistry: MdIconRegistry, private doctorService: DoctorBackendService, private notificationService: NotificationService, private doctorStore: DoctorStore) {
+    constructor(private route: ActivatedRoute, private mdIconRegistry: MdIconRegistry, private sanitizer: DomSanitizer, private doctorService: DoctorBackendService, private notificationService: NotificationService, private doctorStore: DoctorStore) {
 
-        mdIconRegistry.addSvgIcon('M', 'assets/images/svg/human-male.svg');
-        mdIconRegistry.addSvgIcon('F', 'assets/images/svg/human-female.svg');
+        mdIconRegistry.addSvgIcon('M', sanitizer.bypassSecurityTrustResourceUrl('assets/images/svg/human-male.svg'));
+        mdIconRegistry.addSvgIcon('F', sanitizer.bypassSecurityTrustResourceUrl('assets/images/svg/human-female.svg'));
 
     }
 

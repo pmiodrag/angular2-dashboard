@@ -8,7 +8,7 @@ import { DoctorFormComponent } from './doctor-form.component';
 import { DoctorRoutingModule }   from './doctor-routing.module';
 import { SharedModule }        from '../../shared/shared.module';
 import { DoctorBackendService} from './doctor.service';
-import { DoctorStore } from '../state/DoctorStore';
+import { DoctorStore } from  './DoctorStore';
 import { MaterialModule } from '@angular/material';
 import {CalendarModule} from 'primeng/primeng';
 import { Md2Module }  from 'md2';

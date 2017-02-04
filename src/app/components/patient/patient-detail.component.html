@@ -1,102 +1,53 @@
 <div class="col-md-12">
-      <md-toolbar class="col-md-12 combo_blue_bg glass voffset6">
-         <div class="btn-block col-md-6">
-          <div class="col-md-2"><span class="logo col-md-12 white_bg combo_blue">Patient</span></div>
-        <div class="frame frame_active small">                        
-            <a  [routerLink]="['/patients']">
-                 <i class="material-icons">people</i>
-            </a>
-        </div>    
-         </div>
+    <md-toolbar class="col-md-12 combo_blue_bg glass voffset6">
+        <div class="btn-block col-md-6">
+            <div class="col-md-2"><span class="logo col-md-12 white_bg combo_blue">Patient</span></div>
+            <div class="frame frame_active small">                        
+                <a  [routerLink]="['/patients']">
+                    <i class="material-icons">people</i>
+                </a>
+            </div>   
+            <div class="frame frame_active small hoffset8">                        
+                <a  (click)="navigateTo('personal')" >
+                    <i class="material-icons" [ngClass]="{'combo_orange': (patientStore.patientFormPage | async ) == patientFormPage.Personal}">person</i>          
+                </a>
+            </div> 
+            <div class="frame frame_active small hoffset2">                        
+                <a  (click)="navigateTo('gallery')" >
+                    <i class="material-icons"  [ngClass]="{'combo_orange': (patientStore.patientFormPage | async ) == patientFormPage.Gallery}">add_a_photo</i>             
+                </a>
+            </div>    
+            <div class="frame frame_active small hoffset2">                        
+                <a  (click)="navigateTo('contact')" >
+                    <i class="material-icons" [ngClass]="{'combo_orange': (patientStore.patientFormPage | async ) == patientFormPage.Contact}">contact_mail</i>            
+                </a>
+            </div>
+            <div class="frame frame_active small hoffset2">                        
+                <a  (click)="navigateTo('health')" >
+                    <i class="material-icons" [ngClass]="{'combo_orange': (patientStore.patientFormPage | async ) == patientFormPage.HealthInfo}">description</i>                 
+                </a>
+            </div>
+            <div class="frame frame_active small hoffset2">                        
+                <a  (click)="navigateTo('treatments')" >
+                    <i class="material-icons" [ngClass]="{'combo_orange': (patientStore.patientFormPage | async ) == patientFormPage.Treatments}">assignment</i>                     
+                </a>
+            </div>
+        </div>
     </md-toolbar>
-    <div id="card" class="gradient_card"> 
+    <div id="card" class="white_bg"> 
         <div class="contact" *ngIf="patientStore.selected | async">{{ (patientStore.selected | async)?.firstname  }} {{ (patientStore.selected | async)?.lastname  }}</div>
         <md-card-avatar>   
             <a *ngIf="!(patientStore.selected | async)?.photo"  class="profile-spot middle no-border">
                 <img *ngIf="(patientStore.selected | async)?.gender == 'F'"  src="assets/images/svg/human-female.svg"  class="img" />
-                <img *ngIf="(patientStore.selected | async)?.gender == 'M'"  src="assets/images/svg/human-male.svg" class="img" />
+                    <img *ngIf="(patientStore.selected | async)?.gender == 'M'"  src="assets/images/svg/human-male.svg" class="img" />
             </a>
             <a *ngIf="(patientStore.selected | async)?.photo" class="profile-spot small no-border">
                 <img  src="uploads/{{(patientStore.selected | async)?.photo}}"  class="img" />
             </a>
         </md-card-avatar>
-        <button md-mini-fab class="combo_blue hoffset1" [ngClass]="iconClassBg" (click)="setPatientFormPage(patientFormPage.Personal)" >
-            <i class="material-icons" [ngClass]="{'combo_orange': (patientStore.patientFormPage | async ) == patientFormPage.Personal}">person</i>                            
-        </button> 
-        <button  md-mini-fab  class="combo_blue hoffset1" [ngClass]="iconClassBg" (click)="setPatientFormPage(patientFormPage.Photo)">
-            <i class="material-icons"  [ngClass]="{'combo_orange': (patientStore.patientFormPage | async ) == patientFormPage.Photo}">add_a_photo</i>                
-        </button>
-        <button  md-mini-fab  class="combo_blue hoffset1" [ngClass]="iconClassBg" (click)="setPatientFormPage(patientFormPage.Contact)">
-            <i class="material-icons" [ngClass]="{'combo_orange': (patientStore.patientFormPage | async ) == patientFormPage.Contact}">contact_mail</i>             
-        </button>
-        <span class="col-md-1"></span>
-        <button  md-mini-fab  class="combo_blue hoffset1" [ngClass]="iconClassBg" (click)="setPatientFormPage(patientFormPage.HealthInfo)">
-            <i class="material-icons" [ngClass]="{'combo_orange': (patientStore.patientFormPage | async ) == patientFormPage.HealthInfo}">description</i>     
-        </button>
-<!--        <button  md-mini-fab  class="combo_blue" [ngClass]="iconClassBg" (click)="setPatientFormPage(patientFormPage.Summary)">
-            <i class="material-icons" [ngClass]="{'combo_orange': (patientStore.patientFormPage | async ) == patientFormPage.Summary}">note</i>                  
-        </button>-->
-        <md-card-content>
-            <md-list  *ngIf="(patientStore.patientFormPage | async ) == patientFormPage.Personal">  
-                <md-list-item class="badge glass white action_btn col-md-6">PERSONAL DATA</md-list-item>
-                <md-list-item class="col-md-6 action_btn">
-                        <p md-line>
-                            <span><i class="material-icons">account_box</i> </span>
-                            <span class="demo-2"> {{(patientStore.selected | async)?.birthdate}} </span>
-                        </p>
-                    </md-list-item> 
-            </md-list>
-            <md-list  *ngIf="(patientStore.patientFormPage | async ) == patientFormPage.Contact">
-                <md-list-item class="badge glass white action_btn col-md-6">CONTACT DATA</md-list-item>
-                      
-                     <md-list-item class="col-md-6 action_btn">
-                        <p md-line>
-                            <span>  <i class="material-icons">contact_mail</i> </span>
-                            <span class="demo-2"> {{(patientStore.selected | async)?.email}} </span>
-                        </p>
-                    </md-list-item>
-                    <md-list-item class="col-md-6 action_btn">
-                    <p md-line>
-                        <span>  <i class="material-icons">home</i> </span>
-                        <span class="demo-2"> {{(patientStore.selected | async)?.address}}, </span>
-                        <span class="demo-2"> {{(patientStore.selected | async)?.place}} </span>
-                    </p>
-                </md-list-item>
-                <md-list-item class="col-md-6 action_btn">
-                    <p md-line>
-                        <span><i class="material-icons">contact_phone</i> </span>
-                        <span class="demo-2"> {{(patientStore.selected | async)?.phone}} </span>
-                    </p>
-                </md-list-item>
-                <md-list-item class="col-md-6 action_btn">
-                    <p md-line>
-                        <span>  <i class="material-icons">smartphone</i> </span>
-                        <span class="demo-2"> {{(patientStore.selected | async)?.mobilephone}} </span>
-                    </p>
-                </md-list-item>
-               
-            </md-list>
-            <md-list  *ngIf="(patientStore.patientFormPage | async ) == patientFormPage.HealthInfo">
-                <md-list-item class="badge glass white action_btn col-md-6">HEALTH INFO</md-list-item>
-                 <md-list-item class="col-md-6 action_btn">
-                    <p md-line>
-                        <span><i class="material-icons">note</i> </span>
-                        <span class="demo-2"> {{(patientStore.selected | async)?.allergies}} </span>
-                    </p>
-                </md-list-item>
-                <md-list-item class="col-md-6 action_btn">
-                    <p md-line>
-                        <span><i class="material-icons">note</i> </span>
-                        <span class="demo-2"> {{(patientStore.selected | async)?.notes}} </span>
-                    </p>
-                </md-list-item>
-             
-            </md-list>
-            <md-list  *ngIf="(patientStore.patientFormPage | async ) == patientFormPage.Photo">
-                <md-list-item class="badge glass white action_btn col-md-6">GALLERY</md-list-item>
-            </md-list>
+
+        <md-card-content class="col-md-12">
+            <router-outlet></router-outlet>                    
         </md-card-content>
-
-    </div> 
-
+    </div>
 </div>

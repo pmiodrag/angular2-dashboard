@@ -4,13 +4,14 @@ import { Patient, PatientBackendService} from './patient.service';
 import { NotificationService  } from '../../core/notification.service';
 import { Sorter } from '../../shared/sorter';
 import { FilterTextboxComponent } from './filterTextbox.component';
-import { PatientStore, PatientFormPage } from '../state/PatientStore';
+import { PatientStore, PatientFormPage } from './PatientStore';
 import {List} from 'immutable';
 import {asObservable} from "../state/asObservable";
 import * as Rx from "rxjs/Rx";
 import {ICON_CLASS, ICON_CLASS_BG} from '../../shared/constants/app.constants';
 import {PATIENT_OWNER} from '../../shared/constants/app.constants';
 import {MdIconRegistry} from '@angular/material';
+import {DomSanitizer} from '@angular/platform-browser';
 import { Router } from '@angular/router';
 //import {IPaginationInstance} from 'ng2-pagination';
 @Component({
@@ -100,12 +101,13 @@ export class PatientListComponent {
 //    count: number;
 //     collection = [];
     private _patients: Rx.BehaviorSubject<List<Patient>> = new Rx.BehaviorSubject(List([]));
-    constructor(private router: Router, mdIconRegistry: MdIconRegistry, private patientService: PatientBackendService, private notificationService: NotificationService, private patientStore: PatientStore) {
+    constructor(private router: Router, mdIconRegistry: MdIconRegistry, private sanitizer: DomSanitizer, private patientService: PatientBackendService, private notificationService: NotificationService, private patientStore: PatientStore) {
 //        this.refreshPatients();
 //        this.collapse();
-        mdIconRegistry.addSvgIcon('M', 'assets/images/svg/human-male.svg');
-        mdIconRegistry.addSvgIcon('F', 'assets/images/svg/human-female.svg');
-        mdIconRegistry.addSvgIcon('account-remove', 'assets/images/svg/account-remove.svg');
+//        patientStore.loadInitialData();
+        mdIconRegistry.addSvgIcon('M', sanitizer.bypassSecurityTrustResourceUrl('assets/images/svg/human-male.svg'));
+        mdIconRegistry.addSvgIcon('F', sanitizer.bypassSecurityTrustResourceUrl('assets/images/svg/human-female.svg'));
+        mdIconRegistry.addSvgIcon('account-remove', sanitizer.bypassSecurityTrustResourceUrl('assets/images/svg/account-remove.svg'));
 //         for (let i = 1; i <= 100; i++) {
 //            this.collection.push(`item ${i}`);
 //        }

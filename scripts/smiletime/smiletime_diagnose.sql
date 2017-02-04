@@ -29,7 +29,7 @@ CREATE TABLE `diagnose` (
   `name` varchar(500) NOT NULL,
   `description` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `diagnose` (
 
 LOCK TABLES `diagnose` WRITE;
 /*!40000 ALTER TABLE `diagnose` DISABLE KEYS */;
-INSERT INTO `diagnose` VALUES (48,'sdaf',NULL),(49,'sdaf',NULL),(50,'sdaf',NULL);
+INSERT INTO `diagnose` VALUES (51,'karijes',NULL),(52,'upala desni',NULL);
 /*!40000 ALTER TABLE `diagnose` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-29 18:52:23
+-- Dump completed on 2017-02-04 16:36:14

@@ -1,10 +1,10 @@
 import { NgModule }            from '@angular/core';
-import { RouterModule }        from '@angular/router';
+import { Routes, RouterModule }        from '@angular/router';
 
 import { TreatmentComponent }    from './treatment.component';
-import { TreatmentListComponent }    from './treatment.component';
-import { TreatmentFormComponent }    from './treatment.component';
-import { TreatmentDetailComponent }    from './treatment.component';
+import { TreatmentListComponent }    from './treatment-list.component';
+import { TreatmentFormComponent }    from './treatment-form.component';
+//import { TreatmentDetailComponent }    from './treatment.component';
 
 
 const routes: Routes = [
@@ -13,7 +13,7 @@ const routes: Routes = [
     children: [
       { path: '',    component: TreatmentListComponent },
       { path: 'form', component: TreatmentFormComponent },
-      { path: ':id', component: TreatmentDetailComponent }
+//      { path: ':id', component: TreatmentDetailComponent }
     ]
   }
 ];

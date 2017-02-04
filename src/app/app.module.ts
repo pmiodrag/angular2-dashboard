@@ -7,12 +7,13 @@ import { DashboardModule } from './components/dashboard/dashboard.module';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './components/auth/auth.module';
-
+import { StoreModule } from './components/state/store.module';
 @NgModule({
   imports: [
     BrowserModule,
     
     CoreModule.forRoot(),
+    StoreModule.forRoot(),
     MaterialModule.forRoot(),
     SharedModule.forRoot(),
     AuthModule.forRoot(),

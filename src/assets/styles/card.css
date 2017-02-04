@@ -1,6 +1,7 @@
 #card {
-    width: 50% !important;
-    min-height: 600px !important;
+    width: 80% !important;
+    min-height: 800px !important;
+    height: 100%;
     position: relative;
     margin: 10% auto !important;
     border-radius: 8px;

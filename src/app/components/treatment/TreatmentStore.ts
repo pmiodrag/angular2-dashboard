@@ -1,10 +1,10 @@
 import {Injectable} from "@angular/core";
 import {Response} from "@angular/http";
-import {Treatment, TreatmentBackendService} from "../../services/TreatmentBackendService";
+import {Treatment, TreatmentBackendService} from "../treatment/treatment.service";
 import {Observable} from "rxjs/Observable";
 import {Subject} from "rxjs/Subject";
 import {List} from 'immutable';
-import {asObservable} from "./asObservable";
+import {asObservable} from "../state/asObservable";
 import {BehaviorSubject} from "rxjs/Rx";
 
 @Injectable()
@@ -13,7 +13,7 @@ export class TreatmentStore {
     private _treatments: BehaviorSubject<List<Treatment>> = new BehaviorSubject(List([]));
 
     constructor(private treatmentBackendService: TreatmentBackendService) {
-       // this.loadInitialData();
+//        this.loadInitialData();
     }
 
     get treatments() {
@@ -93,7 +93,7 @@ export class TreatmentStore {
             );
     }
     addTreatment(newTreatment: Treatment) {
-
+        console.log("newTreatment",newTreatment);
         this.treatmentBackendService.saveTreatment(newTreatment)
             .subscribe(
                 res => {

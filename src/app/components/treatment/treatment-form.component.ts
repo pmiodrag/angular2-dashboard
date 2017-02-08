@@ -8,6 +8,7 @@ import { Diagnose } from '../diagnose/diagnose.service';
 import { DiagnoseStore } from '../diagnose/DiagnoseStore';
 import { DoctorStore } from '../doctor/DoctorStore';
 import { TypeaheadMatch } from 'ng2-bootstrap';
+import { ActivatedRoute, Params  }  from '@angular/router';
 //import {TimepickerComponent, DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 //import {Typeahead} from 'ng2-typeahead/ng2-typeahead'
 //import {TYPEAHEAD_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
@@ -23,20 +24,28 @@ export class TreatmentFormComponent {
     public treatmentForm: FormGroup; // our model driven form
     public submitted: boolean = false; // keep track on whether form is submitted
     public events: any[] = []; // use later to display form changes
-
+    private patientID: number;
+    private diagnoseId : number;
+    private doctorId : number;
     // Date and time propertiesTimepicker
 
     public selected: string = '';
     public typeaheadLoading: boolean = false;
     public typeaheadNoResults: boolean = false;
-    private diagnoseId : number;
+    
     constructor(private _fb: FormBuilder, private treatmentStore: TreatmentStore, private diagnoseStore: DiagnoseStore,  private doctorStore: DoctorStore, private treatmentService: TreatmentBackendService, 
-        private notificationService: NotificationService) { }
+        private notificationService: NotificationService, private route: ActivatedRoute) { }
 
    
 
     ngOnInit() {
-        this.treatment = new Treatment(0, 1, 1, new Date(), '', 1, '')
+         this.route.parent.parent.parent.params.subscribe(params => {
+            console.log("Params", params)
+            this.patientID = +params['id']; // (+) converts string 'id' to a number
+            console.log("ngOnInit TreatmentFormComponent", this.patientID);
+//            this.treatment = new Treatment(0, this.patientID, 1, new Date(), '', 1, '')
+        });
+        
 //        this.subscription = this.notificationService.getFormActionChangeEmitter()
 //            .subscribe(treatment => this.onFormActionChange(treatment));
         this.treatmentForm =this._fb.group({
@@ -81,7 +90,7 @@ export class TreatmentFormComponent {
     
     private dataToTreatment() : Treatment {
         let treatment = this.treatmentForm;
-        return new Treatment(0, 3, 1, new Date(), treatment.value.therapy, this.diagnoseId, treatment.value.price); 
+        return new Treatment(0, this.patientID, this.doctorId, new Date(), treatment.value.therapy, this.diagnoseId, treatment.value.price); 
     }
     
    
@@ -140,12 +149,18 @@ export class TreatmentFormComponent {
 //        }
 //        
 //    }
-     public typeaheadOnSelect(e: TypeaheadMatch): void {
-    console.log('Selected value: ', e);
-    if(e.item != null) {
-       this.diagnoseId = +e.item.id; 
-    }
     
-  }
+    public typeaheadOnDoctorSelect(e: TypeaheadMatch): void {
+        console.log('Selected doctor value: ', e);
+        if(e.item != null) {
+           this.doctorId = +e.item.id; 
+        }    
+    }
+     public typeaheadOnDiagnoseSelect(e: TypeaheadMatch): void {
+        console.log('Selected value: ', e);
+        if(e.item != null) {
+           this.diagnoseId = +e.item.id; 
+        }    
+    }
 
 }

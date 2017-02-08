@@ -22,7 +22,7 @@ const routes: Routes = [
                     { path: 'contact', component: PatientDetailContactComponent },
                     { path: 'gallery', component: PatientDetailGalleryComponent },
                     { path: 'health', component: PatientDetailHealthComponent },
-                    { path: 'treatments', loadChildren: 'app/components/treatment/treatment.module#TreatmentModule' }
+                    { path: ':owner/treatments', loadChildren: 'app/components/treatment/treatment.module#TreatmentModule' }
                 ]
             }
         ]

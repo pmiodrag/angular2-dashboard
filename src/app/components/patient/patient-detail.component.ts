@@ -79,9 +79,12 @@ export class PatientDetailComponent {
     }
 
     private navigateTo(page: string) {
-        this.router.navigate(['/patients', this.patientID, page] );
+        
         if (page == 'treatments') {
+            this.router.navigate(['/patients', this.patientID, this.owner, page] );
             this.patientStore.setPatientFormPage(PatientFormPage.Treatments);
+        } else {
+            this.router.navigate(['/patients', this.patientID, page] );
         }
     }
 

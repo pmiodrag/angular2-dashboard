@@ -4,38 +4,38 @@
             <div class="col-md-2"><span class="logo col-md-12 white_bg combo_blue">Patient</span></div>
             <div class="frame frame_active small">                        
                 <a  [routerLink]="['/patients']">
-                    <i class="material-icons">people</i>
+                    <i class="material-icons line-height-small">people</i>
                 </a>
             </div>   
-            <div class="frame frame_active small hoffset8">                        
+            <div class="frame frame_active mini hoffset8">                        
                 <a  (click)="navigateTo('personal')" >
-                    <i class="material-icons" [ngClass]="{'combo_orange': (patientStore.patientFormPage | async ) == patientFormPage.Personal}">person</i>          
+                    <i class="material-icons line-height-mini" [ngClass]="{'combo_orange': (patientStore.patientFormPage | async ) == patientFormPage.Personal}">person</i>          
                 </a>
             </div> 
-            <div class="frame frame_active small hoffset2">                        
+            <div class="frame frame_active mini hoffset2">                        
                 <a  (click)="navigateTo('gallery')" >
-                    <i class="material-icons"  [ngClass]="{'combo_orange': (patientStore.patientFormPage | async ) == patientFormPage.Gallery}">add_a_photo</i>             
+                    <i class="material-icons line-height-mini"  [ngClass]="{'combo_orange': (patientStore.patientFormPage | async ) == patientFormPage.Gallery}">add_a_photo</i>             
                 </a>
             </div>    
-            <div class="frame frame_active small hoffset2">                        
+            <div class="frame frame_active mini hoffset2">                        
                 <a  (click)="navigateTo('contact')" >
-                    <i class="material-icons" [ngClass]="{'combo_orange': (patientStore.patientFormPage | async ) == patientFormPage.Contact}">contact_mail</i>            
+                    <i class="material-icons line-height-mini" [ngClass]="{'combo_orange': (patientStore.patientFormPage | async ) == patientFormPage.Contact}">contact_mail</i>            
                 </a>
             </div>
-            <div class="frame frame_active small hoffset2">                        
+            <div class="frame frame_active mini hoffset2">                        
                 <a  (click)="navigateTo('health')" >
-                    <i class="material-icons" [ngClass]="{'combo_orange': (patientStore.patientFormPage | async ) == patientFormPage.HealthInfo}">description</i>                 
+                    <i class="material-icons line-height-mini" [ngClass]="{'combo_orange': (patientStore.patientFormPage | async ) == patientFormPage.HealthInfo}">description</i>                 
                 </a>
             </div>
-            <div class="frame frame_active small hoffset2">                        
+            <div class="frame frame_active mini hoffset2">                        
                 <a  (click)="navigateTo('treatments')" >
-                    <i class="material-icons" [ngClass]="{'combo_orange': (patientStore.patientFormPage | async ) == patientFormPage.Treatments}">assignment</i>                     
+                    <i class="material-icons line-height-mini" [ngClass]="{'combo_orange': (patientStore.patientFormPage | async ) == patientFormPage.Treatments}">assignment</i>                     
                 </a>
             </div>
         </div>
     </md-toolbar>
-    <div id="card" class="white_bg"> 
-        <div class="contact" *ngIf="patientStore.selected | async">{{ (patientStore.selected | async)?.firstname  }} {{ (patientStore.selected | async)?.lastname  }}</div>
+    <div id="card" class="combo_blue_bg"> 
+        <div class="contact dark_blue" *ngIf="patientStore.selected | async">{{ (patientStore.selected | async)?.firstname  }} {{ (patientStore.selected | async)?.lastname  }}</div>
         <md-card-avatar>   
             <a *ngIf="!(patientStore.selected | async)?.photo"  class="profile-spot middle no-border">
                 <img *ngIf="(patientStore.selected | async)?.gender == 'F'"  src="assets/images/svg/human-female.svg"  class="img" />

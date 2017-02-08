@@ -20,7 +20,8 @@
                  <md-list-item class="col-md-10 action_btn voffset8">
                     <input formControlName="doctor"
                            [typeahead]="doctorStore.doctors | async" 
-                           [typeaheadOptionField]="'lastname'"         
+                           [typeaheadOptionField]="'lastname'"  
+                            (typeaheadOnSelect)="typeaheadOnDoctorSelect($event)"
                            typeaheadOptionsLimit="27"
                            typeaheadMinLength="0"
                            placeholder="Doctors"
@@ -28,7 +29,7 @@
                            <input formControlName="diagnose"
                            [typeahead]="diagnoseStore.diagnoses | async" 
                            [typeaheadOptionField]="'name'"  
-                           (typeaheadOnSelect)="typeaheadOnSelect($event)"
+                           (typeaheadOnSelect)="typeaheadOnDiagnoseSelect($event)"
                            typeaheadOptionsLimit="27"
                            typeaheadMinLength="0"
                            placeholder="Diagnoses"
@@ -48,8 +49,8 @@
 
                 </md-list-item>
                  
-                <md-list-item class="md-1-line">      
-                    <div class="col-sm-offset-3 col-sm-8">
+                <md-list-item class="col-md-12 action_btn voffset8">      
+                    <div class="col-sm-offset-3 col-sm-12">
                         <button md-raised-button class="md-accent" type="submit" (click)="onSubmit()" [disabled]="!treatmentForm.valid">add</button>
                     </div>          
                 </md-list-item>

@@ -28,8 +28,15 @@ export class TreatmentBackendService {
         this.baseUrl = '/api/treatments/'
     }
 
-    getAllTreatments() {        
-        return this.http.get(this.baseUrl);
+     getAllTreatments(): Observable<any[]> { 
+        // ...using get request
+        return this.http.get(this.baseUrl)
+            //    ...and calling .json() on the response to return data
+            .map((res: Response) => <any[]>res.json())
+            //                          .map(res => <Bookmark[]> res.json())
+            //...errors if any
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+
     }
 
     saveTreatment(newTreatment: Treatment) : Observable<Response> {
@@ -51,8 +58,8 @@ export class TreatmentBackendService {
     }   
 //   
 
-    deleteTreatment(deleteTreatment: Treatment) : Observable<Response> {
-        return this.http.delete(this.baseUrl + deleteTreatment.id).share();
+    deleteTreatment(deleteTreatment: Treatment) {
+        return this.http.delete(this.baseUrl + deleteTreatment.id);
     }    
    
     handleError(error: any) {

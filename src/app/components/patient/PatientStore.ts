@@ -78,7 +78,7 @@ export class PatientStore {
     }
     
     getPatient(id) {
-        console.log("this._patients getPatient() value", this._patients.getValue());
+        console.log("this._patients getPatient()  _selected value", this._selected.getValue());
         this._selected.next(<Patient>this._patients.getValue().find(x => x.id == id));
 //         this.patientBackendService.getAllPatients()
 //        .subscribe(
@@ -126,44 +126,9 @@ export class PatientStore {
                 return match;
             })))}
         )
-//        this.patientBackendService.getAllPatients()
-//            .subscribe(
-//            res => {
-//                let patients = (<any[]>res.content()).map((patient: any) =>
-//                    new Patient(
-//                        patient.id,
-//                        patient.firstname,
-//                        patient.lastname,
-//                        patient.middlename,
-//                        patient.gender,
-//                        patient.address,
-//                        patient.place,
-//                        patient.birthdate,
-//                        patient.email,
-//                        patient.phone,
-//                        patient.mobilephone,
-//                        patient.photo,
-//                        patient.allergies,
-//                        patient.notes
-//                    ))                    
-//                    .filter(item => {
-//                        let props = ['firstname', 'middlename', 'lastname', 'address', 'place'];
-//                        let match = false;
-//                        for (let prop of props) {
-//                            if (item[prop] != null && item[prop].toString().toUpperCase().indexOf(data) > -1) {
-//                                match = true;
-//                                break;
-//                            }
-//                        };
-//                        return match;
-//                    })
-//                this._patients.next(List(patients));
-//            },
-//            err => console.log("Error retrieving Patients")
-//            );
     }
+    
     addPatient(newPatient: Patient) {
-console.log("addPatient", newPatient);
         this.patientBackendService.savePatient(newPatient).subscribe(
             res => {
                 let newPatient = (<Patient>res.json()); 

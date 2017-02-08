@@ -33,6 +33,7 @@ export class DiagnoseComponent {
     addDiagnose() {     
         let newDiagnose = new Diagnose(0, this.name, this.description);  
         this.diagnoseStore.addDiagnose(newDiagnose)
+        this.name = "";
     }
     deleteDiagnose(diagnose: Diagnose) {
         this.diagnoseStore.deleteDiagnose(diagnose);

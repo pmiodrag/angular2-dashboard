@@ -55,7 +55,7 @@ export class TreatmentStore {
         subscribe(
             treatments => this.treatmentList = treatments,
             error => console.error('Error: '),
-            () => { this._treatments.next(List( <Treatment[]>this.treatmentList['content'].filter(treatment => treatment.doctorid == doctorId)))}
+            () => { this._treatments.next(List( <Treatment[]>this.treatmentList['content'].filter(treatment => treatment.doctorid == doctorId))); console.log("treatments", this._treatments.getValue())}
         )
 
     }

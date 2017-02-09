@@ -19,12 +19,15 @@ export class TreatmentComponent {
             console.log("Params", params)
             this.userID = +params['id']; // (+) converts string 'id' to a number
             console.log("ngOnInit TreatmentComponent", this.userID);
+            this.route.parent.params.subscribe(params => {
             this.owner = params['owner']; // (+) converts string 'id' to a number
+            console.log("Owner", this.owner);
             if (this.owner == DOCTOR_OWNER){
                 this.treatmentStore.loadDoctorTreatments(this.userID);      
            } else {
                 this.treatmentStore.loadPatientTreatments(this.userID);
            }
+            });
         });
         
      

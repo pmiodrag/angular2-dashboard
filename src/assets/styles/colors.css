@@ -125,10 +125,10 @@ and open the template in the editor.
 }
 
 .dark_blue {
-    color: rgb(33, 121, 181);
+    color: rgb(33, 121, 181) !important; 
 }
 .dark_blue_bg {
-    background-color: rgb(33, 121, 181);
+    background-color: rgb(33, 121, 181) !important; 
 }
 .orange {
     color: #d3a938 !important;

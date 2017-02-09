@@ -3,6 +3,10 @@ import { DoctorComponent } from './doctor.component';
 import { FilterTextboxComponent } from './filterTextbox.component';
 import { DoctorHeaderComponent } from './doctor-header.component';
 import { DoctorDetailComponent } from './doctor-detail.component';
+import { DoctorDetailPersonalComponent } from './doctor-detail-personal.component';
+import { DoctorDetailContactComponent } from './doctor-detail-contact.component';
+import { DoctorDetailGalleryComponent } from './doctor-detail-gallery.component';
+import { DoctorDetailEducationComponent } from './doctor-detail-education.component';
 import { DoctorListComponent } from './doctor-list.component';
 import { DoctorFormComponent } from './doctor-form.component';
 import { DoctorRoutingModule }   from './doctor-routing.module';
@@ -19,6 +23,10 @@ import { Md2Module }  from 'md2';
         DoctorHeaderComponent,
         DoctorListComponent,
         DoctorDetailComponent,
+        DoctorDetailPersonalComponent,
+        DoctorDetailContactComponent,
+        DoctorDetailGalleryComponent,
+        DoctorDetailEducationComponent,
         DoctorFormComponent,
         FilterTextboxComponent
     ],

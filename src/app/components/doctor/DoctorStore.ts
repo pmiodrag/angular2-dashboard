@@ -8,7 +8,7 @@ import {asObservable} from "../state/asObservable";
 import {BehaviorSubject} from "rxjs/Rx";
 
 
-export enum DoctorFormPage { Personal, Photo, Contact, Education, Summary}
+export enum DoctorFormPage { Personal, Gallery, Contact, Education, Summary, Treatments}
 
 @Injectable()
 export class DoctorStore {
